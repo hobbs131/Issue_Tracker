@@ -17,7 +17,7 @@ heroku create
 heroku addons:create heroku-postgresql:hobby-dev
 # see .env.example and heroku control panel to build the DSN
 heroku config:set DB_DSN="..."
-git push heroku master
+git push heroku main
 heroku open
 ```
 
