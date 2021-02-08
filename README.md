@@ -1,10 +1,10 @@
-# Module 2 Group Assignment
+# Module 1 Group Assignment
 
 CSCI 5117, Spring 2021, [assignment description](https://canvas.umn.edu/courses/217951/pages/project-1)
 
 ## App Info:
 
-* Team Name: TODO
+* Team Name: Blueberries
 * App Name: TODO
 * App Link: <https://TODO.heroku.com/>
 
