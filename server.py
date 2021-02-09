@@ -1,27 +1,13 @@
-import os
-import psycopg2
-
 from flask import Flask, render_template, request, g
+
+import db
+
 app = Flask(__name__)
 
-
-def connect_db():
-    """Connects to the specific database."""
-    return psycopg2.connect(os.environ.get('DB_DSN'))
-
-def get_db():
-    """Opens a new database connection if there is none yet for the
-    current application context.
-    """
-    if not hasattr(g, 'pg_db'):
-        g.pg_db = connect_db()
-    return g.pg_db
-
-@app.teardown_appcontext
-def close_db(error):
-    """Closes the database again at the end of the request."""
-    if hasattr(g, 'db'):
-        g.pg_db.close()
+# have the DB submodule set itself up before we get started. groovy.
+@app.before_first_request
+def initialize():
+    db.setup()
 
 @app.route('/')
 def hello_world():
@@ -30,11 +16,8 @@ def hello_world():
 
 @app.route('/people')
 def people():
-    conn = get_db()
+    with db.get_db_cursor() as cur:
+        cur.execute("SELECT * FROM person;")
+        names = [record[1] for record in cur]
 
-    cur = conn.cursor()
-    cur.execute("SELECT * FROM person;")
-    names = [record[1] for record in cur]
-    cur.close()
-
-    return render_template("people.html", names=names)
+        return render_template("people.html", names=names)
