@@ -1,6 +1,4 @@
-# Upgrade of session 4 example. Now with heroku and postgressql
-# in-class-09-19
-heroku, postgres
+# in-class 2021-02-10
 
 docs:
 * <http://flask.pocoo.org/docs/1.0/quickstart/>
@@ -15,8 +13,7 @@ heroku setup:
 ```
 heroku create
 heroku addons:create heroku-postgresql:hobby-dev
-# see .env.example and heroku control panel to build the DSN
-heroku config:set DB_DSN="..."
+# see .env.example and make a .env file. Note the database URL can be copied directly from heroku's console.
 git push heroku main
 heroku open
 ```
@@ -26,17 +23,12 @@ local setup:
 ```
 # setup
 pipenv install
+pipenv shell
+
 # create .env with datastore connection params (see .env.example)
+heroku pg:psql
+# run schema.sql against the DB
 
 # run
-pipenv shell
 heroku local dev
-```
-
-heroku commands:
-
-```
-heroku logs --tail
-heroku pg
-heroku pg:psql
 ```
