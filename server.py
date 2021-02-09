@@ -10,7 +10,7 @@ def initialize():
     db.setup()
 
 @app.route('/')
-def hello_world():
+def home():
     user_name = request.args.get("userName", "unknown")
     return render_template('main.html', user=user_name)
 
