@@ -45,9 +45,9 @@ In this space please either provide images (max 4) showing your prototypes, OR, 
 **[Add images/photos that show your paper prototype (maximum 4)](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository) along with a very brief caption:**
 
 ![Issue_tracker1](https://user-images.githubusercontent.com/60115853/107570068-ab753980-6bae-11eb-9769-bb4dadfd69ae.png?raw=true "Login and Main Page")
-![Issue_tracker2](https://user-images.githubusercontent.com/60115853/107570204-d790ba80-6bae-11eb-8e88-827baf492870.png)
-![Issue_track3](https://user-images.githubusercontent.com/60115853/107570240-e24b4f80-6bae-11eb-943d-29a6d65b1376.png)
-![issue_tracker4](https://user-images.githubusercontent.com/60115853/107570270-e9725d80-6bae-11eb-9501-9599a624878d.png)
+![Issue_tracker2](https://user-images.githubusercontent.com/60115853/107570204-d790ba80-6bae-11eb-8e88-827baf492870.png?raw=true "Add and Delete Row View")
+![Issue_track3](https://user-images.githubusercontent.com/60115853/107570240-e24b4f80-6bae-11eb-943d-29a6d65b1376.png?raw=true "Login and Main Page")
+![issue_tracker4](https://user-images.githubusercontent.com/60115853/107570270-e9725d80-6bae-11eb-9501-9599a624878d.png?raw=true "Login and Main Page")
 
 
 ## External Dependencies
