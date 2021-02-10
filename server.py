@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, g, redirect, url_for
+from flask import Flask, render_template, request, g, redirect, url_for, jsonify
 
 import db
 
@@ -30,3 +30,16 @@ def new_person():
         cur.execute("INSERT INTO person (name) values (%s)", (name,))
         
         return redirect(url_for('people'))
+
+@app.route('/api/foo')
+def api_foo():
+    data = {
+        "message": "hello, world",
+        "isAGoodExample": False,
+        "aList": [1, 2, 3],
+        "nested": {
+            "key": "value"
+        }
+    }
+    return jsonify(data)
+
