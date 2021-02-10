@@ -44,7 +44,7 @@ In this space please either provide images (max 4) showing your prototypes, OR, 
 
 **[Add images/photos that show your paper prototype (maximum 4)](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository) along with a very brief caption:**
 
-![](https://media.giphy.com/media/26ufnwz3wDUli7GU0/giphy.gif)
+![Issue_tracker1](https://user-images.githubusercontent.com/60115853/107570068-ab753980-6bae-11eb-9769-bb4dadfd69ae.png)
 
 
 ## External Dependencies
