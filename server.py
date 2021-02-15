@@ -35,13 +35,19 @@ def new_person():
 @app.route('/people/<int:id>', methods=['GET'])
 def get_person(id):
     with db.get_db_cursor(False) as cur:
-        cur.execute("SELECT name from person where person_id = %s;", (id,))
-        names = [record[0] for record in cur];
-        if(len(names) == 0):
+        cur.execute("SELECT name, description from person where person_id = %s;", (id,))
+        people = [record for record in cur];
+        if(len(people) == 0):
             return abort(404)
         else:
-            return render_template("person.html", name=names[0], id=id)
+            return render_template("person.html", name=people[0][0], desc=people[0][1], id=id)
 
+@app.route('/people/<int:id>', methods=['POST'])
+def edit_person(id):
+    description = request.form.get("description")
+    with db.get_db_cursor(True) as cur:
+        cur.execute("UPDATE person set description = %s where person_id = %s;", (description, id))
+        return redirect(url_for("get_person", id=id))
 
 @app.errorhandler(404)
 def error404(error):

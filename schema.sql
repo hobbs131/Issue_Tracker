@@ -1,9 +1,9 @@
 drop table gift_idea;
 drop table person;
 
-
 create table person (
   person_id SERIAL PRIMARY KEY,
+  description text default '',
   name varchar(255) NOT NULL
 );
 
