@@ -1,5 +1,6 @@
-drop table person;
 drop table gift_idea;
+drop table person;
+
 
 create table person (
   person_id SERIAL PRIMARY KEY,

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, g, redirect, url_for, jsonify
+from flask import Flask, render_template, request, g, redirect, url_for, jsonify, abort
 
 import db
 
@@ -20,7 +20,7 @@ def people():
         cur.execute("SELECT * FROM person;")
         names = [record[1] for record in cur]
 
-        return render_template("people.html", names=names)
+        return render_template('people.html', user=user_name)
 
 @app.route('/people', methods=['POST'])
 def new_person():
@@ -30,6 +30,23 @@ def new_person():
         cur.execute("INSERT INTO person (name) values (%s)", (name,))
         
         return redirect(url_for('people'))
+
+
+@app.route('/people/<int:id>', methods=['GET'])
+def get_person(id):
+    with db.get_db_cursor(False) as cur:
+        cur.execute("SELECT name from person where person_id = %s;", (id,))
+        names = [record[0] for record in cur];
+        if(len(names) == 0):
+            return abort(404)
+        else:
+            return render_template("person.html", name=names[0], id=id)
+
+
+@app.errorhandler(404)
+def error404(error):
+    return "oh no. you killed it."
+
 
 @app.route('/api/foo')
 def api_foo():
