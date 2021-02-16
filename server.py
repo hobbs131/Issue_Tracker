@@ -1,13 +1,58 @@
-from flask import Flask, render_template, request, g, redirect, url_for, jsonify, abort
-
+from flask import Flask, render_template, request, g, redirect, url_for, jsonify, abort, session
+from urllib.parse import urlencode
+import os
 import db
+from auth0 import auth0, auth0_setup, require_auth
 
 app = Flask(__name__)
+app.secret_key = os.environ["FLASK_SECRET_KEY"]
 
 # have the DB submodule set itself up before we get started. groovy.
 @app.before_first_request
 def initialize():
     db.setup()
+    auth0_setup()
+
+
+
+### AUTH:
+@app.route('/login')
+def login():
+    if 'profile' in session:
+        return redirect(url_for('test_auth'))
+    else:
+        return auth0.authorize_redirect(redirect_uri=url_for('callback', _external=True))
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    params = { 'returnTo': url_for('home', _external=True), 'client_id': os.environ['AUTH0_CLIENT_ID'] }
+    return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
+
+@app.route('/callback')
+def callback():
+    auth0.authorize_access_token()
+    resp = auth0.get('userinfo')
+    userinfo = resp.json()
+
+    session['jwt_payload'] = userinfo
+    session['profile'] = {
+        'user_id': userinfo['sub'],
+        'name': userinfo['name'],
+        'picture': userinfo['picture']
+    }
+
+    return redirect('/test_auth')
+
+@app.route('/test_auth')
+@require_auth
+def test_auth():
+    return render_template("test_auth.html", profile=session['profile'])
+
+
+
+
+
 
 @app.route('/')
 def home():
@@ -17,10 +62,10 @@ def home():
 @app.route('/people', methods=['GET'])
 def people():
     with db.get_db_cursor() as cur:
-        cur.execute("SELECT * FROM person;")
-        names = [record[1] for record in cur]
+        cur.execute("SELECT name FROM person;")
+        names = [record[0] for record in cur]
 
-        return render_template('people.html', user=user_name)
+        return render_template('people.html', names=names)
 
 @app.route('/people', methods=['POST'])
 def new_person():

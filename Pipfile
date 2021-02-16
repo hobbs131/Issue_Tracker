@@ -9,6 +9,10 @@ verify_ssl = true
 flask = "*"
 gunicorn = "*"
 psycopg2-binary = "*"
+python-dotenv = "*"
+requests = "*"
+authlib = "*"
+six = "*"
 
 [requires]
 python_version = "3.7"
