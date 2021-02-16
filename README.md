@@ -8,28 +8,38 @@ docs:
 * <https://developer.salesforce.com/blogs/developer-relations/2016/05/heroku-connect-flask-psycopg2.html>
 
 
-heroku setup:
-
-```
-heroku create
-heroku addons:create heroku-postgresql:hobby-dev
-# use `heroku config` to see environemnt variables, and setup a personal .env file
-# see .env.example and make a .env file. Note the database URL can be copied directly from heroku's console.
-git push heroku main
-heroku open
-```
-
-local setup:
+### local setup:
 
 ```
 # setup
 pipenv install
 pipenv shell
+```
 
-# create .env with datastore connection params (see .env.example)
-heroku pg:psql
-# run schema.sql against the DB
+### heroku setup:
 
-# run
+```
+heroku create
+heroku addons:create heroku-postgresql:hobby-dev
+heroku config # take note of the DATABASE_URL
+cp .env.example .env
+# modify .env to have the DATABASE_URL
+heroku pg:psql # run the commands in schema.sql
+```
+
+### Run remotely
+```
+git add .
+git commit -m "setting up heroku"
+git push heroku main
+heroku open
+```
+
+### run locally
+```
+# setup
+pipenv install
+pipenv shell
 heroku local dev
 ```
+
