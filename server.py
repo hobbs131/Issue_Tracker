@@ -2,7 +2,9 @@ from flask import Flask, render_template, request, g, redirect, url_for, jsonify
 from urllib.parse import urlencode
 import os
 import db
-from auth0 import auth0, auth0_setup, require_auth
+from auth0 import auth0_setup, require_auth, auth0
+
+
 
 app = Flask(__name__)
 app.secret_key = os.environ["FLASK_SECRET_KEY"]
@@ -21,18 +23,18 @@ def login():
     if 'profile' in session:
         return redirect(url_for('test_auth'))
     else:
-        return auth0.authorize_redirect(redirect_uri=url_for('callback', _external=True))
+        return auth0().authorize_redirect(redirect_uri=url_for('callback', _external=True))
 
 @app.route('/logout')
 def logout():
     session.clear()
     params = { 'returnTo': url_for('home', _external=True), 'client_id': os.environ['AUTH0_CLIENT_ID'] }
-    return redirect(auth0.api_base_url + '/v2/logout?' + urlencode(params))
+    return redirect(auth0().api_base_url + '/v2/logout?' + urlencode(params))
 
 @app.route('/callback')
 def callback():
-    auth0.authorize_access_token()
-    resp = auth0.get('userinfo')
+    auth0().authorize_access_token()
+    resp = auth0().get('userinfo')
     userinfo = resp.json()
 
     session['jwt_payload'] = userinfo

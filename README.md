@@ -31,13 +31,12 @@ heroku pg:psql # run the commands in schema.sql
 1. You will need an auth0 account
 2. You will need an auth0 application
 3. You will need to configure your auth0 application on their website: <https://auth0.com/docs/quickstart/webapp/python/01-login>
-    * The "communication" in auth0 occurs mostly in the client browser -- so you don't really need to tell auth0 where your server is, just where you're browser accesses it.
     * If you want to test locally, you will need to configure an auth0 application to point locally. (i.e. `http://localhost:5000`)
     * If you want to run on heroku, you will need to look up your heroku urls and point auth0 to that.
-    * In this example, our login url is `<domain>/login`, our logout url is `<domain>/` (we only redirect after logout to the home page), and our callback url is `<domain>/callback` 
-        * In testing I was finding auth0 to not like `localhost:5000/login` as an "Application Login URI" -- it seems OK with this being left blank.
+    * I _think_ you can (mostly) configure one auth0 application to work for both, the only issue is that it seems auth0 only accepts one login url, (which can be left blank)
+    * In this example, our logout url is `<domain>/` (we only redirect after logout to the home page), and our callback url is `<domain>/callback` .
 4. update your `.env` file with auth0 related data (for local testing)
-5. use `heroku config:set PARAM=VALUE` commands to update heroku's environment variables as well. These probably will not match those in your `.env` file.
+5. use `heroku config:set PARAM=VALUE` commands to update heroku's environment variables as well.
 
 ### Run remotely
 ```
