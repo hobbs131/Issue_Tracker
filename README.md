@@ -11,6 +11,7 @@ CSCI 5117, Spring 2021, [assignment description](https://canvas.umn.edu/courses/
 ### Students
 
 * Tanner Hobbs, hobbs131@umn.edu
+* Isabel Richardson, rich1529@umn.edu
 * ...
 
 
