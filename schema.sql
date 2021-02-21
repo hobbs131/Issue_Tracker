@@ -1,23 +1,14 @@
-drop table gift_idea;
-drop table person;
+drop table issues;
 
-create table person (
-  person_id SERIAL PRIMARY KEY,
-  description text default '',
-  name varchar(255) NOT NULL
+create table issues (
+  number SERIAL PRIMARY KEY,
+  issue varchar(255),
+  priority varchar(255),
+  opened_on DATE,
+  opened_by varchar(255),
+  assignee varchar(255),
+  closed_on DATE,
+  closed_by varchar(255),
+  status varchar(255)
 );
 
-create table gift_idea (
-  gift_idea_id SERIAL PRIMARY KEY,
-  person_id int references person,
-  product varchar(255) NOT NULL,
-  external_link varchar(255)
-);
-
-insert into person (name) values ('Yang He');
-insert into person (name) values ('Daniel Kluver');
-
--- I know a weird number of people named laura
-insert into person (name) values ('Laura');
-insert into person (name) values ('Laura (house)');
-insert into person (name) values ('Laura (family)');

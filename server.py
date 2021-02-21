@@ -21,7 +21,7 @@ def initialize():
 @app.route('/login')
 def login():
     if 'profile' in session:
-        return redirect(url_for('test_auth'))
+        return redirect(url_for('issues'))
     else:
         return auth0().authorize_redirect(redirect_uri=url_for('callback', _external=True))
 
@@ -44,72 +44,18 @@ def callback():
         'picture': userinfo['picture']
     }
 
-    return redirect('/test_auth')
-
-@app.route('/test_auth')
-@require_auth
-def test_auth():
-    return render_template("test_auth.html", profile=session['profile'])
-
-
-
-
-
+    return redirect('/issues')
 
 @app.route('/')
 def home():
-    user_name = request.args.get("userName", "unknown")
-    return render_template('main.html', user=user_name)
+     return redirect(url_for('login'))
 
-@app.route('/people', methods=['GET'])
-def people():
-    with db.get_db_cursor() as cur:
-        cur.execute("SELECT name FROM person;")
-        names = [record[0] for record in cur]
+@app.route('/issues')
+def issues():
+        return render_template('issues.html')
 
-        return render_template('people.html', names=names)
-
-@app.route('/people', methods=['POST'])
-def new_person():
+@app.route('/add_issue')
+def add_issue():
     with db.get_db_cursor(True) as cur:
-        name = request.form.get("name", "unnamed friend")
-        app.logger.info("Adding person %s", name)
-        cur.execute("INSERT INTO person (name) values (%s)", (name,))
-        
-        return redirect(url_for('people'))
-
-
-@app.route('/people/<int:id>', methods=['GET'])
-def get_person(id):
-    with db.get_db_cursor(False) as cur:
-        cur.execute("SELECT name, description from person where person_id = %s;", (id,))
-        people = [record for record in cur];
-        if(len(people) == 0):
-            return abort(404)
-        else:
-            return render_template("person.html", name=people[0][0], desc=people[0][1], id=id)
-
-@app.route('/people/<int:id>', methods=['POST'])
-def edit_person(id):
-    description = request.form.get("description")
-    with db.get_db_cursor(True) as cur:
-        cur.execute("UPDATE person set description = %s where person_id = %s;", (description, id))
-        return redirect(url_for("get_person", id=id))
-
-@app.errorhandler(404)
-def error404(error):
-    return "oh no. you killed it."
-
-
-@app.route('/api/foo')
-def api_foo():
-    data = {
-        "message": "hello, world",
-        "isAGoodExample": False,
-        "aList": [1, 2, 3],
-        "nested": {
-            "key": "value"
-        }
-    }
-    return jsonify(data)
+       return render_template('issues.html')
 
