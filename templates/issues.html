@@ -1,4 +1,33 @@
 {% extends "parent.html" %}
 {% block title %}People{% endblock %}
 {% block content %}
+<table class="pure-table">
+    <thead>
+        <tr>
+            <th>Number</th>
+            <th>Issue</th>
+            <th>Priority</th>
+            <th>Opened On</th>
+            <th>Opened By</th>
+            <th>Assignee</th>
+            <th>Closed On</th>
+            <th>Closed By</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+   	{% for r in results %}
+   		<tr>
+   			<td> {{r.id}} </td>
+   			<td> {{r.issue}} </td>
+   			<td> {{r.priority}} </td>
+   			<td> {{r.opened_on}} </td>
+   			<td> {{r.opened_by}} </td>
+   			<td> {{r.assignee}} </td>
+   			<td> {{r.closed_on}} </td>
+   			<td> {{r.closed_by}} </td>
+   			<td> {{r.status}} </td>
+   		</tr>
+   	{% endfor %}
+    </tbody>
 {% endblock %}

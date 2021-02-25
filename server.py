@@ -52,10 +52,30 @@ def home():
 
 @app.route('/issues')
 def issues():
-        return render_template('issues.html')
+	with db.get_db_cursor(True) as cur:
+		cur.execute("SELECT json_agg(issues) FROM issues")
+		results = cur.fetchone()[0]
+		if (results != None):
+			return render_template('issues.html', results=results)
 
 @app.route('/add_issue')
 def add_issue():
-    with db.get_db_cursor(True) as cur:
-       return render_template('issues.html')
+    return render_template('add_issue.html')
+
+@app.route('/postIssueEntry', methods = ["POST"])
+def postIssueEntry():
+	with db.get_db_cursor(True) as cur:
+		issue = request.form.get('issue')
+		priority = request.form.get('priority')
+		opened_on = request.form.get('opened_on')
+		opened_by = request.form.get('opened_by')
+		assignee = request.form.get('assignee')
+		closed_on = request.form.get('closed_on')
+		closed_by = request.form.get('closed_by')
+		status = request.form.get('status')
+		cur.execute("INSERT INTO issues (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status) values (%s,%s,%s,%s,%s,%s,%s,%s)", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status,))
+		cur.execute("SELECT json_agg(issues) FROM issues")
+		results = cur.fetchone()[0]
+		return render_template('issues.html', results=results)
+
 
