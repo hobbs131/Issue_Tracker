@@ -57,6 +57,7 @@ def issues():
 		results = cur.fetchone()[0]
 		if (results != None):
 			return render_template('issues.html', results=results)
+		return render_template('issues.html')
 
 @app.route('/add_issue')
 def add_issue():
@@ -74,8 +75,6 @@ def postIssueEntry():
 		closed_by = request.form.get('closed_by')
 		status = request.form.get('status')
 		cur.execute("INSERT INTO issues (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status) values (%s,%s,%s,%s,%s,%s,%s,%s)", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status,))
-		cur.execute("SELECT json_agg(issues) FROM issues")
-		results = cur.fetchone()[0]
-		return render_template('issues.html', results=results)
+		return redirect('/issues')
 
 
