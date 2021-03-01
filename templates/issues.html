@@ -2,7 +2,7 @@
 {% block title %}People{% endblock %}
 {% block content %}
 <table class="pure-table">
-    <thead>
+    <thead style = "border-right-style: hidden">
         <tr>
             <th>Number</th>
             <th>Issue</th>
@@ -13,6 +13,7 @@
             <th>Closed On</th>
             <th>Closed By</th>
             <th>Status</th>
+            <th class = "button-header"> </th>
         </tr>
     </thead>
     <tbody>
@@ -27,6 +28,8 @@
    			<td> {{r.closed_on}} </td>
    			<td> {{r.closed_by}} </td>
    			<td> {{r.status}} </td>
+        <td class = "buttons"><button class="pure-button pure-button-primary">Edit</button>
+        <button class="pure-button pure-button-primary">Delete</button></td>
    		</tr>
    	{% endfor %}
     </tbody>
