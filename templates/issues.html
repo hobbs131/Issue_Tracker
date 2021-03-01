@@ -17,26 +17,32 @@
         </tr>
     </thead>
     <tbody>
+	<script>
+	function edit(id,row) {
+		console.log(id)
+		console.log(row)
+	}
+	</script>
+	{% set prio = ["Low","Medium","High","Urgent"] %}
    	{% for r in results %}
    		<tr>
    			<td> {{r.id}} </td>
-   			<td> {{r.issue}} </td>
-   			<td> {{r.priority}} </td>
+   			<td> <input class = "disabled" type = "text" value = "{{r.issue}}" disabled /> </td>
+   			<td> <select class = "disabled" disabled>
+			{% for p in prio %}
+				<option value = "{{p}}" {% if r.priority == p %}selected{% endif %}>{{p}}</option>
+			{% endfor %}
+			</select></td>
    			<td> {{r.opened_on}} </td>
    			<td> {{r.opened_by}} </td>
    			<td> {{r.assignee}} </td>
    			<td> {{r.closed_on}} </td>
    			<td> {{r.closed_by}} </td>
    			<td> {{r.status}} </td>
-        <td class = "buttons"><button class="pure-button pure-button-primary" onclick = "edit({{r.id}},this.parentElement)">Edit</button>
+        <td class = "buttons"><button class="pure-button pure-button-primary" onclick = "edit({{r.id}},this.parentElement.parentElement)">Edit</button>
         <button class="pure-button pure-button-primary">Delete</button></td>
    		</tr>
    	{% endfor %}
-	<script>
-	function edit(id,row){
-		console.log(id)
-		console.log(row)
-	}
-	</script>
+	
     </tbody>
 {% endblock %}
