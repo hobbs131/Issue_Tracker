@@ -28,7 +28,7 @@
    			<td> {{r.closed_on}} </td>
    			<td> {{r.closed_by}} </td>
    			<td> {{r.status}} </td>
-        <td class = "buttons"><button class="pure-button pure-button-primary">Edit</button>
+        <td class = "buttons"><button class="pure-button pure-button-primary" onclick = "edit({{r.id}},this.parent)">Edit</button>
         <button class="pure-button pure-button-primary">Delete</button></td>
    		</tr>
    	{% endfor %}
