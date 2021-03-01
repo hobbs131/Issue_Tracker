@@ -1,6 +1,24 @@
 {% extends "parent.html" %}
 {% block title %}People{% endblock %}
 {% block content %}
+<style>
+.disabled{
+	color:black;
+	background-color:#0000;
+	border: 0px solid;
+}
+</style>
+<script>
+function edit(id,row) {
+	console.log(id)
+	console.log(row)
+	cells = row.childNodes
+	for(i = 1;i<9;i++){
+		cells[i].firstChild.disabled = false;
+	}
+	console.log(cells[8].firstChild.firstChild);
+}
+</script>
 <table class="pure-table">
     <thead style = "border-right-style: hidden">
         <tr>
@@ -17,13 +35,8 @@
         </tr>
     </thead>
     <tbody>
-	<script>
-	function edit(id,row) {
-		console.log(id)
-		console.log(row)
-	}
-	</script>
 	{% set prio = ["Low","Medium","High","Urgent"] %}
+	{% set status = ["Open","Closed","In Progress"] %}
    	{% for r in results %}
    		<tr>
    			<td> {{r.id}} </td>
@@ -33,16 +46,19 @@
 				<option value = "{{p}}" {% if r.priority == p %}selected{% endif %}>{{p}}</option>
 			{% endfor %}
 			</select></td>
-   			<td> {{r.opened_on}} </td>
-   			<td> {{r.opened_by}} </td>
-   			<td> {{r.assignee}} </td>
-   			<td> {{r.closed_on}} </td>
-   			<td> {{r.closed_by}} </td>
-   			<td> {{r.status}} </td>
-        <td class = "buttons"><button class="pure-button pure-button-primary" onclick = "edit({{r.id}},this.parentElement.parentElement)">Edit</button>
-        <button class="pure-button pure-button-primary">Delete</button></td>
+   			<td> <input class = "disabled" type = "date" value="{{r.opened_on}}" disabled /> </td>
+   			<td> <input class = "disabled" type = "text" value = "{{r.opened_by}}" disabled /> </td>
+   			<td> <input class = "disabled" type = "text" value = "{{r.assignee}}" disabled /> </td>
+   			<td> <input class = "disabled" type = "date" value="{{r.closed_on}}" disabled /> </td>
+   			<td> <input class = "disabled" type = "text" value = "{{r.closed_by}}" disabled /> </td>
+   			<td> <select class = "disabled" disabled>
+			{% for s in status %}
+				<option value = "{{s}}" {% if r.status == s %}selected{% endif %}>{{s}}</option>
+			{% endfor %}
+			</select></td>
+			<td class = "buttons"><button class="pure-button pure-button-primary" onclick = "edit({{r.id}},this.parentElement.parentElement)">Edit</button>
+			<button class="pure-button pure-button-primary">Delete</button></td>
    		</tr>
    	{% endfor %}
-	
     </tbody>
 {% endblock %}
