@@ -14,9 +14,10 @@ function edit(id,row) {
 	console.log(row)
 	cells = row.childNodes
 	for(i = 1;i<9;i++){
-		cells[i].firstChild.disabled = false;
+		cells[i].children[0].disabled = false;
+		cells[i].children[0].className="";
 	}
-	console.log(cells[8].firstChild.firstChild);
+	console.log(cells[8].children[0].children[0]);
 }
 </script>
 <table class="pure-table">
