@@ -12,7 +12,7 @@
 function edit(id,row) {
 	console.log(id)
 	console.log(row)
-	cells = row.childNodes
+	cells = row.children
 	for(i = 1;i<9;i++){
 		cells[i].children[0].disabled = false;
 		cells[i].children[0].className="";
