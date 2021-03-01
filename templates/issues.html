@@ -6,6 +6,16 @@
 	color:black;
 	background-color:#0000;
 	border: 0px solid;
+	opacity:1;
+}
+select.disabled {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+select.disabled::-ms-expand {
+    display: none;
 }
 </style>
 <script>
@@ -17,7 +27,7 @@ function edit(id,row) {
 		cells[i].children[0].disabled = false;
 		cells[i].children[0].className="";
 	}
-	console.log(cells[8].children[0].children[0]);
+	console.log(cells[9].children[0].children[0]);
 }
 </script>
 <table class="pure-table">
