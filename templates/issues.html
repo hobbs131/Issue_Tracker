@@ -1,36 +1,70 @@
 {% extends "parent.html" %}
-{% block title %}People{% endblock %}
+{% block title %}Issues{% endblock %}
 {% block content %}
-<table class="pure-table">
-    <thead style = "border-right-style: hidden">
-        <tr>
-            <th>Number</th>
-            <th>Issue</th>
-            <th>Priority</th>
-            <th>Opened On</th>
-            <th>Opened By</th>
-            <th>Assignee</th>
-            <th>Closed On</th>
-            <th>Closed By</th>
-            <th>Status</th>
-            <th class = "button-header"> </th>
-        </tr>
-    </thead>
-    <tbody>
-   	{% for r in results %}
-   		<tr>
-   			<td> {{r.id}} </td>
-   			<td> {{r.issue}} </td>
-   			<td> {{r.priority}} </td>
-   			<td> {{r.opened_on}} </td>
-   			<td> {{r.opened_by}} </td>
-   			<td> {{r.assignee}} </td>
-   			<td> {{r.closed_on}} </td>
-   			<td> {{r.closed_by}} </td>
-   			<td> {{r.status}} </td>
-        <td class = "buttons"><button class="pure-button pure-button-primary">Edit</button>
-        <button class="pure-button pure-button-primary">Delete</button></td>
-   		</tr>
-   	{% endfor %}
-    </tbody>
+  <table class="pure-table">
+      <thead style = "border-right-style: hidden">
+          <tr>
+              <th>Number</th>
+              <th>Issue</th>
+              <th>Priority</th>
+              <th>Opened On</th>
+              <th>Opened By</th>
+              <th>Assignee</th>
+              <th>Closed On</th>
+              <th>Closed By</th>
+              <th>Status</th>
+              <th class = "button-header"> </th>
+          </tr>
+      </thead>
+
+      <tbody>
+        	{% for r in results %}
+        		<tr>
+          			<td> {{r.id}} </td>
+          			<td> {{r.issue}} </td>
+          			<td> {{r.priority}} </td>
+          			<td> {{r.opened_on}} </td>
+          			<td> {{r.opened_by}} </td>
+          			<td> {{r.assignee}} </td>
+          			<td> {{r.closed_on}} </td>
+          			<td> {{r.closed_by}} </td>
+          			<td> {{r.status}} </td>
+                <td class = "buttons">
+                    <button class="edit-button" onclick="editIssue(this);">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                    <button class="delete-button" onclick="deleteIssue(this);">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </td>
+        		</tr>
+        	{% endfor %}
+      </tbody>
+  </table>
+
 {% endblock %}
+
+
+{% block scripts %}
+<script type="text/javascript">
+
+  function editIssue(button) {
+      // TODO - implement this
+  };
+
+  function deleteIssue(button) {
+      row = button.parentNode.parentNode;
+      const data = { issueId: row.cells[0].innerHTML };
+      fetch('/delete', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+      });
+
+      row.remove();
+  };
+
+</script>
+{%endblock %}
