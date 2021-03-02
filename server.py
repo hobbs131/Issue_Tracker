@@ -16,20 +16,21 @@ def initialize():
     auth0_setup()
 
 
-
 ### AUTH:
 @app.route('/login')
 def login():
     if 'profile' in session:
-        return redirect(url_for('issues'))
+        return redirect('/issues')
     else:
         return auth0().authorize_redirect(redirect_uri=url_for('callback', _external=True))
+
 
 @app.route('/logout')
 def logout():
     session.clear()
     params = { 'returnTo': url_for('home', _external=True), 'client_id': os.environ['AUTH0_CLIENT_ID'] }
     return redirect(auth0().api_base_url + '/v2/logout?' + urlencode(params))
+
 
 @app.route('/callback')
 def callback():
@@ -46,22 +47,26 @@ def callback():
 
     return redirect('/issues')
 
+
 @app.route('/')
 def home():
      return redirect(url_for('login'))
 
+
 @app.route('/issues')
 def issues():
 	with db.get_db_cursor(True) as cur:
-		cur.execute("SELECT json_agg(issues) FROM issues")
+		cur.execute("SELECT json_agg(issues) FROM issues WHERE deletedAt IS NULL")
 		results = cur.fetchone()[0]
 		if (results != None):
 			return render_template('issues.html', results=results)
 		return render_template('issues.html')
 
+
 @app.route('/add_issue')
 def add_issue():
     return render_template('add_issue.html')
+
 
 @app.route('/postIssueEntry', methods = ["POST"])
 def postIssueEntry():
@@ -78,3 +83,10 @@ def postIssueEntry():
 		return redirect('/issues')
 
 
+@app.route('/delete', methods = ["POST"])
+def deleteIssueEntry():
+    with db.get_db_cursor(True) as cur:
+        data = request.json
+        id = data['issueId']
+        cur.execute("UPDATE issues  SET  deletedAt = now()  WHERE  id = %s" % id)
+        return ""

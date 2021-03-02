@@ -20,3 +20,21 @@ body div#content {
 	width: 0%;
 	margin-left: 50em;
 }
+
+.disabled{
+	color:black;
+	background-color:#0000;
+	border: 0px solid;
+	opacity:1;
+}
+
+select.disabled {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+select.disabled::-ms-expand {
+    display: none;
+}
