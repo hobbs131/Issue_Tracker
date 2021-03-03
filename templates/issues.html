@@ -66,7 +66,7 @@ function edit(id,row) {
 		cells[i].children[0].className="";
 	}
 	cells[9].children[0].innerText="Save";
-	cells[9].children[0].setAttribute("onClick","save("+id+",this)");
+	cells[9].children[0].setAttribute("onClick","save("+id+",this.parentElement.parentElement)");
 }
 function save(id,row){
 	console.log("saving")
@@ -78,7 +78,7 @@ function save(id,row){
 		cells[i].children[0].className="disabled";
 	}
 	cells[9].children[0].innerText="Edit";
-	cells[9].children[0].setAttribute("onClick","edit("+id+",this)");
+	cells[9].children[0].setAttribute("onClick","edit("+id+",this.parentElement.parentElement)");
 	$.post("/edit_issue",{
 		"id": 		 id,
 		"issue": 	 cells[1].children[0].value,
