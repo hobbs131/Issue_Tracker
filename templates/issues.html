@@ -1,56 +1,72 @@
 {% extends "parent.html" %}
 {% block title %}Issues{% endblock %}
 {% block content %}
-  <table class="pure-table">
-      <thead style = "border-right-style: hidden">
-          <tr>
-              <th>Number</th>
-              <th>Issue</th>
-              <th>Priority</th>
-              <th>Opened On</th>
-              <th>Opened By</th>
-              <th>Assignee</th>
-              <th>Closed On</th>
-              <th>Closed By</th>
-              <th>Status</th>
-              <th class = "button-header"> </th>
-          </tr>
-      </thead>
-
-      <tbody>
-          {% set prio = ["Low","Medium","High","Urgent"] %}
-        	{% set status = ["Open","Closed","In Progress"] %}
-        	{% for r in results %}
-        		<tr>
-                <td> {{r.id}} </td>
-                <td> <input class = "disabled" type = "text" value = "{{r.issue}}" disabled /> </td>
-                <td> <select class = "disabled" disabled>
-                    {% for p in prio %}
-                      <option value = "{{p}}" {% if r.priority == p %}selected{% endif %}>{{p}}</option>
-                    {% endfor %}
-                </select></td>
-                <td> <input class = "disabled" type = "date" value="{{r.opened_on}}" disabled /> </td>
-                <td> <input class = "disabled" type = "text" value = "{{r.opened_by}}" disabled /> </td>
-                <td> <input class = "disabled" type = "text" value = "{{r.assignee}}" disabled /> </td>
-                <td> <input class = "disabled" type = "date" value="{{r.closed_on}}" disabled /> </td>
-                <td> <input class = "disabled" type = "text" value = "{{r.closed_by}}" disabled /> </td>
-                <td> <select class = "disabled" disabled>
-                    {% for s in status %}
-                      <option value = "{{s}}" {% if r.status == s %}selected{% endif %}>{{s}}</option>
-                    {% endfor %}
-                </select></td>
-                <td class = "buttons">
-                    <button class="edit-button" onclick="edit({{r.id}},this.parentElement.parentElement)">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                    <button class="delete-button" onclick="deleteIssue(this);">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </td>
-        		</tr>
-        	{% endfor %}
-      </tbody>
-  </table>
+<style>
+.disabled{
+	color:black;
+	background-color:#0000;
+	border: 0px solid;
+	opacity:1;
+}
+select.disabled {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		text-indent: 1px;
+		text-overflow: '';
+}
+select.disabled::-ms-expand {
+		display: none;
+}
+</style>
+<table class="pure-table">
+	<thead style = "border-right-style: hidden">
+		<tr>
+			<th>Number</th>
+			<th>Issue</th>
+			<th>Priority</th>
+			<th>Opened On</th>
+			<th>Opened By</th>
+			<th>Assignee</th>
+			<th>Closed On</th>
+			<th>Closed By</th>
+			<th>Status</th>
+			<th class = "button-header"> </th>
+		</tr>
+</thead>
+	<tbody>
+		{% set prio = ["Low","Medium","High","Urgent"] %}
+		{% set status = ["Open","Closed","In Progress"] %}
+		{% for r in results %}
+		<tr>
+			<td> {{r.id}} </td>
+			<td> <input class = "disabled" type = "text" value = "{{r.issue}}" disabled /> </td>
+			<td> <select class = "disabled" disabled>
+				{% for p in prio %}
+					<option value = "{{p}}" {% if r.priority == p %}selected{% endif %}>{{p}}</option>
+				{% endfor %}
+			</select></td>
+			<td> <input class = "disabled" type = "date" value="{{r.opened_on}}" disabled /> </td>
+			<td> <input class = "disabled" type = "text" value = "{{r.opened_by}}" disabled /> </td>
+			<td> <input class = "disabled" type = "text" value = "{{r.assignee}}" disabled /> </td>
+			<td> <input class = "disabled" type = "date" value="{{r.closed_on}}" disabled /> </td>
+			<td> <input class = "disabled" type = "text" value = "{{r.closed_by}}" disabled /> </td>
+			<td> <select class = "disabled" disabled>
+				{% for s in status %}
+					<option value = "{{s}}" {% if r.status == s %}selected{% endif %}>{{s}}</option>
+				{% endfor %}
+			</select></td>
+			<td class = "buttons">
+				<button class="edit-button" onclick="edit({{r.id}},this.parentElement.parentElement)">
+					<i class="fa fa-edit"></i>
+				</button>
+				<button class="delete-button" onclick="deleteIssue(this);">
+					<i class="fa fa-trash"></i>
+				</button>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
 
 {% endblock %}
 
@@ -82,10 +98,10 @@ function save(id,row){
 	$.post("/edit_issue",{
 		"id": 		 id,
 		"issue": 	 cells[1].children[0].value,
-		"priority":  cells[2].children[0].value,
+		"priority":	cells[2].children[0].value,
 		"opened_on": cells[3].children[0].value,
 		"opened_by": cells[4].children[0].value,
-		"assignee":  cells[5].children[0].value,
+		"assignee":	cells[5].children[0].value,
 		"closed_on": cells[6].children[0].value,
 		"closed_by": cells[7].children[0].value,
 		"status": 	 cells[8].children[0].value,
