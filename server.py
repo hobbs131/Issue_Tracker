@@ -50,13 +50,13 @@ def callback():
 
 @app.route('/')
 def home():
-	return redirect(url_for('login'))
+	 return redirect(url_for('login'))
 
 
 @app.route('/issues')
 def issues():
 	with db.get_db_cursor(True) as cur:
-		cur.execute("SELECT json_agg(issues) FROM issues WHERE deletedAt IS NULL")
+		cur.execute("SELECT json_agg(issues) FROM issues WHERE deleted IS NULL")
 		results = cur.fetchone()[0]
 		if (results != None):
 			return render_template('issues.html', results=results)
@@ -81,7 +81,6 @@ def postIssueEntry():
 		status = request.form.get('status')
 		cur.execute("INSERT INTO issues (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status) values (%s,%s,%s,%s,%s,%s,%s,%s)", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status,))
 		return redirect('/issues')
-
 @app.route('/edit_issue', methods = ["POST"])
 def editIssueEntry():
 	with db.get_db_cursor(True) as cur:
@@ -95,6 +94,7 @@ def editIssueEntry():
 		closed_by = request.form.get('closed_by')
 		status = request.form.get('status')
 		cur.execute("UPDATE issues SET issue=%s, priority = %s, opened_on = %s, opened_by = %s, assignee = %s, closed_on = %s, closed_by = %s, status = %s WHERE id = ?", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status,id))
+
 
 @app.route('/delete', methods = ["POST"])
 def deleteIssueEntry():
