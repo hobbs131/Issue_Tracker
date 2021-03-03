@@ -9,6 +9,7 @@ create table issues (
   assignee varchar(255),
   closed_on varchar(255),
   closed_by varchar(255),
-  status varchar(255)
+  status varchar(255),
+  deletedAt Date
 );
 

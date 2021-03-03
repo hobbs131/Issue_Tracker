@@ -56,7 +56,7 @@ def home():
 @app.route('/issues')
 def issues():
 	with db.get_db_cursor(True) as cur:
-		cur.execute("SELECT json_agg(issues) FROM issues WHERE deleted IS NULL")
+		cur.execute("SELECT json_agg(issues) FROM issues WHERE deletedAt IS NULL")
 		results = cur.fetchone()[0]
 		if (results != None):
 			return render_template('issues.html', results=results)
@@ -101,5 +101,5 @@ def deleteIssueEntry():
 	with db.get_db_cursor(True) as cur:
 		data = request.json
 		id = data['issueId']
-		cur.execute("UPDATE issues  SET  deletedAt = now()  WHERE  id = %s" % id)
+		cur.execute("UPDATE issues SET  deletedAt = now()  WHERE  id = %s" % id)
 		return ""
