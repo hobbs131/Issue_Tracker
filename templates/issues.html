@@ -5,17 +5,21 @@
 .disabled{
 	color:black;
 	background-color:#0000;
-	border: 0px solid;
+	border: 2px solid #0000;
 	opacity:1;
 }
+input,select{
+	max-width:160px;
+	width:160px;
+}
 select.disabled {
-		-webkit-appearance: none;
-		-moz-appearance: none;
-		text-indent: 1px;
-		text-overflow: '';
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-indent: 1px;
+	text-overflow: '';
 }
 select.disabled::-ms-expand {
-		display: none;
+	display: none;
 }
 </style>
 <table class="pure-table">
@@ -32,18 +36,18 @@ select.disabled::-ms-expand {
 			<th>Status</th>
 			<th class = "button-header"> </th>
 		</tr>
-</thead>
+	</thead>
 	<tbody>
-		{% set prio = ["Low","Medium","High","Urgent"] %}
-		{% set status = ["Open","Closed","In Progress"] %}
-		{% for r in results %}
+	{% set prio = ["Low","Medium","High","Urgent"] %}
+	{% set status = ["Open","Closed","In Progress"] %}
+	{% for r in results %}
 		<tr>
 			<td> {{r.id}} </td>
 			<td> <input class = "disabled" type = "text" value = "{{r.issue}}" disabled /> </td>
 			<td> <select class = "disabled" disabled>
-				{% for p in prio %}
-					<option value = "{{p}}" {% if r.priority == p %}selected{% endif %}>{{p}}</option>
-				{% endfor %}
+			{% for p in prio %}
+				<option value = "{{p}}" {% if r.priority == p %}selected{% endif %}>{{p}}</option>
+			{% endfor %}
 			</select></td>
 			<td> <input class = "disabled" type = "date" value="{{r.opened_on}}" disabled /> </td>
 			<td> <input class = "disabled" type = "text" value = "{{r.opened_by}}" disabled /> </td>
@@ -51,12 +55,12 @@ select.disabled::-ms-expand {
 			<td> <input class = "disabled" type = "date" value="{{r.closed_on}}" disabled /> </td>
 			<td> <input class = "disabled" type = "text" value = "{{r.closed_by}}" disabled /> </td>
 			<td> <select class = "disabled" disabled>
-				{% for s in status %}
-					<option value = "{{s}}" {% if r.status == s %}selected{% endif %}>{{s}}</option>
-				{% endfor %}
+			{% for s in status %}
+				<option value = "{{s}}" {% if r.status == s %}selected{% endif %}>{{s}}</option>
+			{% endfor %}
 			</select></td>
 			<td class = "buttons">
-				<button class="edit-button" onclick="edit({{r.id}},this.parentElement.parentElement)">
+				<button class="edit-button" onclick="editIssue({{r.id}},this.parentElement.parentElement)">
 					<i class="fa fa-edit"></i>
 				</button>
 				<button class="delete-button" onclick="deleteIssue(this);">
@@ -64,16 +68,14 @@ select.disabled::-ms-expand {
 				</button>
 			</td>
 		</tr>
-		{% endfor %}
+	{% endfor %}
 	</tbody>
 </table>
-
 {% endblock %}
-
 
 {% block scripts %}
 <script type="text/javascript">
-function edit(id,row) {
+function editIssue(id,row) {
 	console.log(id)
 	console.log(row)
 	cells = row.children
@@ -82,9 +84,9 @@ function edit(id,row) {
 		cells[i].children[0].className="";
 	}
 	cells[9].children[0].innerHTML="<i class=\"fa fa-save\"></i>";
-	cells[9].children[0].setAttribute("onClick","save("+id+",this.parentElement.parentElement)");
+	cells[9].children[0].setAttribute("onClick","saveIssue("+id+",this.parentElement.parentElement)");
 }
-function save(id,row){
+function saveIssue(id,row){
 	console.log("saving")
 	console.log(id)
 	console.log(row)
@@ -94,7 +96,7 @@ function save(id,row){
 		cells[i].children[0].className="disabled";
 	}
 	cells[9].children[0].innerHTML="<i class=\"fa fa-edit\"></i>";
-	cells[9].children[0].setAttribute("onClick","edit("+id+",this.parentElement.parentElement)");
+	cells[9].children[0].setAttribute("onClick","editIssue("+id+",this.parentElement.parentElement)");
 	$.post("/edit_issue",{
 		"id": 		 id,
 		"issue": 	 cells[1].children[0].value,
