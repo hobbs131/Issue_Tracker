@@ -78,9 +78,9 @@ function save(id,row){
 		cells[i].children[0].className="disabled";
 	}
 	cells[9].children[0].innerText="Edit";
-	cells[9].children[0].onclick="edit("+id+",this)";
+	cells[9].children[0].setAttribute("onClick","edit("+id+",this)");
 	$.post("/edit_issue",{
-		"id": 		 cells[0].children[0].value,
+		"id": 		 id,
 		"issue": 	 cells[1].children[0].value,
 		"priority":  cells[2].children[0].value,
 		"opened_on": cells[3].children[0].value,
