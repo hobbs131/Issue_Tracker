@@ -22,7 +22,10 @@ select.disabled::-ms-expand {
 	display: none;
 }
 </style>
-<table class="pure-table">
+
+<input type="text" id="search" onkeyup="searchTable()" placeholder="Search Issues"><br><br>
+
+<table class="pure-table" id="issueTable">
 	<thead style = "border-right-style: hidden">
 		<tr>
 			<th>Number</th>
@@ -122,5 +125,25 @@ function deleteIssue(button) {
 	});
 	row.remove();
 };
+
+function searchTable(){
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("search").value;
+	filter = input.toUpperCase();
+	table = document.getElementById("issueTable");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+			txtValue = td.getElementsByTagName('input')[0].value;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+		}
+  }
+}
+
 </script>
 {%endblock %}
