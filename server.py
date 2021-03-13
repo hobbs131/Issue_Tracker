@@ -34,6 +34,7 @@ def logout():
 
 @app.route('/callback')
 def callback():
+	print("callback")
 	auth0().authorize_access_token()
 	resp = auth0().get('userinfo')
 	userinfo = resp.json()
