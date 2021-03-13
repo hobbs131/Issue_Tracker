@@ -34,6 +34,7 @@ def logout():
 
 @app.route('/callback')
 def callback():
+	print("callback")
 	auth0().authorize_access_token()
 	resp = auth0().get('userinfo')
 	userinfo = resp.json()
@@ -98,7 +99,7 @@ def editIssueEntry():
 		print("DEBUG: (\""+str(id)+"\",\""+issue+"\",\""+priority+"\",\""+opened_on+"\",\""+opened_by+"\",\""+assignee+"\",\""+closed_on+"\",\""+closed_by+"\",\""+status+"\")");
 		cur.execute("UPDATE issues SET issue=%s, priority = %s, opened_on = %s, opened_by = %s, assignee = %s, closed_on = %s, closed_by = %s, status = %s WHERE id = %s", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status,id))
 		return ""
-		
+
 
 @app.route('/delete', methods = ["POST"])
 def deleteIssueEntry():
