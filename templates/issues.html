@@ -4,7 +4,7 @@
 
 <input type="text" id="search" onkeyup="searchTable()" placeholder="Search Issues"><br>
 
-<table class="pure-table" id="issueTable">
+<table class="pure-table" id="issueTable" style = "width: 100%">
 	<thead style = "border-right-style: hidden">
 		<tr id="issueTableHeaders">
 			<th onclick="reorder('id');" style="min-width: 40px">ID</th>
@@ -26,17 +26,17 @@
 	{% for r in results %}
 		<tr>
 			<td> {{r.id}} </td>
-			<td> <input class = "disabled" type = "text" value = "{{r.issue}}" disabled /> </td>
+			<td> <input class = "disabled" type = "text" value = "{{r.issue}}" disabled size="10"/> </td>
 			<td> <select class = "disabled" disabled>
 			{% for p in prio %}
 				<option value = "{{p}}" {% if r.priority == p %}selected{% endif %}>{{p}}</option>
 			{% endfor %}
 			</select></td>
-			<td> <input class = "disabled" type = "date" value="{{r.opened_on}}" disabled /> </td>
-			<td> <input class = "disabled" type = "text" value = "{{r.opened_by}}" disabled /> </td>
-			<td> <input class = "disabled" type = "text" value = "{{r.assignee}}" disabled /> </td>
-			<td> <input class = "disabled" type = "date" value="{{r.closed_on}}" disabled /> </td>
-			<td> <input class = "disabled" type = "text" value = "{{r.closed_by}}" disabled /> </td>
+			<td> <input class = "disabled" type = "date" value="{{r.opened_on}}" disabled size="10"/> </td>
+			<td> <input class = "disabled" type = "text" value = "{{r.opened_by}}" disabled size="10"/> </td>
+			<td> <input class = "disabled" type = "text" value = "{{r.assignee}}" disabled size="10"/> </td>
+			<td> <input class = "disabled" type = "date" value="{{r.closed_on}}" disabled size="10"/> </td>
+			<td> <input class = "disabled" type = "text" value = "{{r.closed_by}}" disabled size="10"/> </td>
 			<td> <select class = "disabled" disabled>
 			{% for s in status %}
 				<option value = "{{s}}" {% if r.status == s %}selected{% endif %}>{{s}}</option>
