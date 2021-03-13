@@ -81,6 +81,8 @@ def postIssueEntry():
 		status = request.form.get('status')
 		cur.execute("INSERT INTO issues (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status) values (%s,%s,%s,%s,%s,%s,%s,%s)", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status,))
 		return redirect('/issues')
+
+
 @app.route('/edit_issue', methods = ["POST"])
 def editIssueEntry():
 	with db.get_db_cursor(True) as cur:
@@ -96,6 +98,7 @@ def editIssueEntry():
 		print("DEBUG: (\""+str(id)+"\",\""+issue+"\",\""+priority+"\",\""+opened_on+"\",\""+opened_by+"\",\""+assignee+"\",\""+closed_on+"\",\""+closed_by+"\",\""+status+"\")");
 		cur.execute("UPDATE issues SET issue=%s, priority = %s, opened_on = %s, opened_by = %s, assignee = %s, closed_on = %s, closed_by = %s, status = %s WHERE id = %s", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status,id))
 		return ""
+		
 
 @app.route('/delete', methods = ["POST"])
 def deleteIssueEntry():
