@@ -16,25 +16,26 @@ body div#content {
 	border: hidden;
 }
 
-.pure-form {
-	width: 0%;
-	margin-left: 50em;
-}
 
 .disabled{
 	color:black;
 	background-color:#0000;
-	border: 0px solid;
+	border: 2px solid #0000;
 	opacity:1;
 }
 
 select.disabled {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    text-indent: 1px;
-    text-overflow: '';
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-indent: 1px;
+	text-overflow: '';
 }
 
 select.disabled::-ms-expand {
-    display: none;
+  display: none;
+}
+
+input, select{
+	max-width:160px;
+	width:160px;
 }

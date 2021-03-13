@@ -1,34 +1,13 @@
 {% extends "parent.html" %}
 {% block title %}Issues{% endblock %}
 {% block content %}
-<style>
-.disabled{
-	color:black;
-	background-color:#0000;
-	border: 2px solid #0000;
-	opacity:1;
-}
-input,select{
-	max-width:160px;
-	width:160px;
-}
-select.disabled {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	text-indent: 1px;
-	text-overflow: '';
-}
-select.disabled::-ms-expand {
-	display: none;
-}
-</style>
 
 <input type="text" id="search" onkeyup="searchTable()" placeholder="Search Issues"><br><br>
 
 <table class="pure-table" id="issueTable">
 	<thead style = "border-right-style: hidden">
 		<tr>
-			<th>Number</th>
+			<th>ID</th>
 			<th>Issue</th>
 			<th>Priority</th>
 			<th>Opened On</th>
@@ -78,6 +57,7 @@ select.disabled::-ms-expand {
 
 {% block scripts %}
 <script type="text/javascript">
+
 function editIssue(id,row) {
 	console.log(id)
 	console.log(row)
@@ -89,6 +69,7 @@ function editIssue(id,row) {
 	cells[9].children[0].innerHTML="<i class=\"fa fa-save\"></i>";
 	cells[9].children[0].setAttribute("onClick","saveIssue("+id+",this.parentElement.parentElement)");
 }
+
 function saveIssue(id,row){
 	console.log("saving")
 	console.log(id)
