@@ -7,6 +7,11 @@ body div#content {
     padding:1em;
 }
 
+body #search {
+  min-width: 250px;
+  margin: 25px 5px;
+}
+
 .buttons {
 	border: hidden;
 }
@@ -33,9 +38,4 @@ select.disabled {
 
 select.disabled::-ms-expand {
   display: none;
-}
-
-input, select{
-	max-width:160px;
-	width:160px;
 }

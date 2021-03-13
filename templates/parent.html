@@ -21,7 +21,7 @@
 <body>
   <div id="menu">
     <div class="pure-menu">
-      <a href="#" class="pure-menu-heading pure-menu-link">Issue Tracker</a>
+      <a href="/add_issue" class="pure-menu-heading pure-menu-link">Issue Tracker</a>
         <ul class="pure-menu-horizontal">
           <li class="pure-menu-item">
             <a href="{{ url_for("issues") }}" class="pure-menu-link">Issue Table</a>
@@ -29,8 +29,8 @@
           <li class="pure-menu-item">
             <a href="{{ url_for("add_issue") }}" class="pure-menu-link">Add Issue</a>
           </li>
-          {% if session.profile %}
 
+          {% if session.profile %}
           <li class="pure-menu-item">
             <a href="{{ url_for("logout") }}" class="pure-menu-link">Logout</a>
           </li>
