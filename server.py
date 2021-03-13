@@ -56,8 +56,18 @@ def home():
 
 @app.route('/issues')
 def issues():
+	if 'order-by' in request.args:
+		order_by = request.args.get('order-by')
+	else:
+		order_by = "id"
+
+	if 'order' in request.args:
+		order = request.args.get('order')
+	else:
+		order = 'DESC'
+
 	with db.get_db_cursor(True) as cur:
-		cur.execute("SELECT json_agg(issues) FROM issues WHERE deletedAt IS NULL")
+		cur.execute("SELECT json_agg(elem) FROM (SELECT * FROM issues WHERE deletedAt IS NULL ORDER BY {order_by} {order}) as elem".format(order_by=order_by, order=order))
 		results = cur.fetchone()[0]
 		if (results != None):
 			return render_template('issues.html', results=results)
@@ -83,7 +93,6 @@ def postIssueEntry():
 		cur.execute("INSERT INTO issues (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status) values (%s,%s,%s,%s,%s,%s,%s,%s)", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status,))
 		return redirect('/issues')
 
-
 @app.route('/edit_issue', methods = ["POST"])
 def editIssueEntry():
 	with db.get_db_cursor(True) as cur:
@@ -100,11 +109,9 @@ def editIssueEntry():
 		cur.execute("UPDATE issues SET issue=%s, priority = %s, opened_on = %s, opened_by = %s, assignee = %s, closed_on = %s, closed_by = %s, status = %s WHERE id = %s", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status,id))
 		return ""
 
-
-@app.route('/delete', methods = ["POST"])
+@app.route('/delete_issue', methods = ["POST"])
 def deleteIssueEntry():
 	with db.get_db_cursor(True) as cur:
-		data = request.json
-		id = data['issueId']
+		id = int(request.form.get('id'))
 		cur.execute("UPDATE issues SET  deletedAt = now()  WHERE  id = %s" % id)
 		return ""
