@@ -6,16 +6,16 @@
 
 <table class="pure-table" id="issueTable">
 	<thead style = "border-right-style: hidden">
-		<tr>
-			<th>ID</th>
-			<th>Issue</th>
-			<th>Priority</th>
-			<th>Opened On</th>
-			<th>Opened By</th>
-			<th>Assignee</th>
-			<th>Closed On</th>
-			<th>Closed By</th>
-			<th>Status</th>
+		<tr id="issueTableHeaders">
+			<th onclick="reorder('id');">ID</th>
+			<th onclick="reorder('issue');">Issue</th>
+			<th onclick="reorder('priority');">Priority</th>
+			<th onclick="reorder('opened_on');">Opened On</th>
+			<th onclick="reorder('opened_by');">Opened By</th>
+			<th onclick="reorder('assignee');">Assignee</th>
+			<th onclick="reorder('closed_on');">Closed On</th>
+			<th onclick="reorder('closed_by');">Closed By</th>
+			<th onclick="reorder('status');">Status</th>
 			<th class = "button-header"> </th>
 		</tr>
 	</thead>
@@ -46,7 +46,7 @@
 				<button class="edit-button" onclick="editIssue({{r.id}},this.parentElement.parentElement)">
 					<i class="fa fa-edit"></i>
 				</button>
-				<button class="delete-button" onclick="deleteIssue(this);">
+				<button class="delete-button" onclick="deleteIssue({{r.id}},this.parentElement.parentElement);">
 					<i class="fa fa-trash"></i>
 				</button>
 			</td>
@@ -60,9 +60,54 @@
 {% block scripts %}
 <script type="text/javascript">
 
+var headerDict = {
+	"id": 0,
+	"issue": 1,
+	"priority": 2,
+	"opened_on": 3,
+	"opened_by": 4,
+	"assignee": 5,
+	"closed_on": 6,
+	"closed_by": 7,
+	"status": 8
+}
+
+function setOrderIcon() {
+	var urlParams = new URLSearchParams(window.location.search);
+	console.log(urlParams.has('order-by'));
+	console.log(urlParams.get('order-by'));
+
+	var column = 0;
+	if (urlParams.has('order-by')) {
+		column = headerDict[urlParams.get('order-by')];
+	}
+	console.log(column);
+
+	var order = 'desc';
+	if (urlParams.has('order')) {
+		order = urlParams.get('order-by');
+	}
+
+	var headers = document.getElementById("issueTableHeaders").cells;
+
+	if (order = 'asc') {
+		headers[column].innerHTML += "<i class='fa fa-arrow-down' aria-hidden='true' style='float:right'></i>"
+	} else {
+		headers[column].innerHTML += "<i class='fa fa-arrow-up' aria-hidden='true' style='float:right'></i>"
+	}
+
+	//<i class="fa fa-arrow-up" aria-hidden="true" style="visibility:hidden"></i>
+	//<i class="fa fa-arrow-down" aria-hidden="true" style="visibility:hidden"></i>
+}
+
+$('document').ready(setOrderIcon);
+
+function reorder(name) {
+	console.log(name);
+	window.location = "issues?order-by=" + name;
+}
+
 function editIssue(id,row) {
-	console.log(id)
-	console.log(row)
 	cells = row.children
 	for(i = 1;i<9;i++){
 		cells[i].children[0].disabled = false;
@@ -73,9 +118,6 @@ function editIssue(id,row) {
 }
 
 function saveIssue(id,row){
-	console.log("saving")
-	console.log(id)
-	console.log(row)
 	cells = row.children
 	for(i = 1;i<9;i++){
 		cells[i].children[0].disabled = true;
@@ -96,23 +138,11 @@ function saveIssue(id,row){
 	});
 }
 
-function deleteIssue(button) {
-	row = button.parentNode.parentNode;
+function deleteIssue(id, row) {
 	$.post("/delete_issue", {
 		"id": id
 	});
 	row.remove();
-	/*
-	const data = { issueId: row.cells[0].innerHTML };
-	fetch('/delete_issue', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify(data),
-	});
-	row.remove();
-	*/
 };
 
 function searchTable(){
