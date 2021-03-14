@@ -26,16 +26,13 @@
         <li class="pure-menu-item">
           <a href="{{ url_for("issues") }}" class="pure-menu-link">Issue Table</a>
         </li>
-        <li class="pure-menu-item">
-          <a href="{{ url_for("add_issue") }}" class="pure-menu-link">Add Issue</a>
-        </li>
 
         {% if session.profile %}
-          <li class="pure-menu-item">
+          <li class="pure-menu-item" id="logout">
             <a href="{{ url_for("logout") }}" class="pure-menu-link">Logout</a>
           </li>
         {% else %}
-          <li class="pure-menu-item">
+          <li class="pure-menu-item" id="login">
             <a href="{{ url_for("login") }}" class="pure-menu-link">Login</a>
           </li>
         {% endif %}
@@ -44,8 +41,8 @@
   </div>
 
   <div style="margin:auto; text-align:center;">
-    <h1>Issue Tracker</h1>
-    <h4>use this tool to keep track of todo's</h4>
+    <h1 class = "headertext">Issue Tracker</h1>
+    <p class = "subtitle">a tool for tracking your program's bugs</p>
   </div>
 
   <div id="content">

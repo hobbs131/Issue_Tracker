@@ -1,15 +1,11 @@
-body #menu {
-    border-bottom: 2px lightblue solid;
-    background-color: rgba(10, 169, 255, 0.25);
-}
-
 body div #content {
     padding:1em;
 }
 
 body #search {
   min-width: 250px;
-  margin: 25px 5px;
+  margin: 5px 2.5%;
+  border-radius: 8px;
 }
 
 .buttons {
@@ -52,5 +48,29 @@ select.disabled::-ms-expand {
 
 #issueTable {
   border: none;
+  width: 95%;
+  margin:auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
 
+#logout, #login {
+  float:right;
+  margin: 0 5%;
+}
+
+#addissue {
+  background-color: whitesmoke;
+  border-radius: 8px;
+}
+
+.headertext {
+  font-family: "Lucida Console", monospace;
+  font-size: xxx-large;
+  margin: 0;
+}
+
+.subtitle {
+  margin: 5px;
+  margin-bottom: 20px;
 }
