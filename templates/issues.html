@@ -120,7 +120,7 @@ function setTableOptions() {
 	if (urlParams.has('hide-closed') && urlParams.get('hide-closed') == "true") {
 		optionsDiv.innerHTML += "<button type='button' class='pure-button pure-button secondary' onclick='showClosed();'>Show closed issues</button>"
 	} else {
-		optionsDiv.innerHTML += "<button type='button' class='pure-button pure-button secondary' onclick='hideClosed();'>Hide closed issues</button>"
+		optionsDiv.innerHTML += "<button type='button' class='pure-button pure-button secondary' onclick='hideClosed() ;'>Hide closed issues</button>"
 	}
 }
 
