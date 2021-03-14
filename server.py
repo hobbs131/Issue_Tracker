@@ -98,6 +98,22 @@ def issues():
 def add_issue():
 	return render_template('add_issue.html')
 
+@app.route('/view_issue')
+def view_issue():
+
+	if 'id' in request.args:
+		id = request.args.get('id')
+		with db.get_db_cursor(True) as cur:
+			cur.execute("SELECT json_agg(issues) FROM issues WHERE id = {id}".format(id=id))
+
+			results = cur.fetchone()[0]
+			print(results)
+			if (results != None):
+				return render_template('view_issue.html', results=results)
+
+	return redirect('/issues')
+
+
 
 @app.route('/postIssueEntry', methods = ["POST"])
 def postIssueEntry():
@@ -110,7 +126,8 @@ def postIssueEntry():
 		closed_on = request.form.get('closed_on')
 		closed_by = request.form.get('closed_by')
 		status = request.form.get('status')
-		cur.execute("INSERT INTO issues (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status) values (%s,%s,%s,%s,%s,%s,%s,%s)", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status,))
+		description = request.form.get('description')
+		cur.execute("INSERT INTO issues (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status, description) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status, description))
 		return redirect('/issues')
 
 @app.route('/edit_issue', methods = ["POST"])

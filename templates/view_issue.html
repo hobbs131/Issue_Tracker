@@ -2,62 +2,70 @@
 {% block title %}Add an Issue{% endblock %}
 
 {% block content %}
+{% set r = results[0] %}
 {% set prio = ["Low","Medium","High","Urgent"] %}
 {% set status = ["Open","Closed","In Progress"] %}
 
 <div id="issue_div">
   <form id="issueForm" class="pure-form pure-form-stacked" method="post" action="postIssueEntry">
     <fieldset>
-      <legend>Add Issue</legend>
+      <legend>View Issue</legend>
       <div class="pure-g">
 
         <div class="pure-u-1 pure-u-md-1-2">
           <label for="issue">Issue</label>
-          <textarea id="inGridTextArea" name="issue" rows="2" cols="45" wrap="soft"></textarea>
+          <textarea id="inGridTextArea" class="disabled" name="issue" rows="2" cols="45" wrap="soft" disabled>{{r.issue}}</textarea>
 
           <label for="priority">Priority</label>
-          <select name="priority">
+          <select name="priority" class="disabled" disabled>
             {% for p in prio %}
-    				    <option value="{{p}}">{{p}}</option>
+    				   <option value="{{p}}" {% if r.priority == p %}selected{% endif %}>{{p}}</option>
     			  {% endfor %}
           </select>
         </div>
 
         <div class="pure-u-1 pure-u-md-1-2">
           <label for="assignee">Assignee</label>
-          <input type="text" name="assignee"/>
+          <input type="text" class="disabled" name="assignee" value="{{r.assignee}}" disabled/>
 
           <label for="status">Status</label>
-          <select name="status">
+          <select name="status" class="disabled" disabled>
             {% for s in status %}
-    				    <option value="{{s}}">{{s}}</option>
+    				    <option value="{{s}}" {% if r.status == s %}selected{% endif %}>{{s}}</option>
     			  {% endfor %}
           </select>
         </div>
 
         <div class="pure-u-1 pure-u-md-1-2">
           <label for="opened_on">Opened On</label>
-          <input type="date" name="opened_on"/>
+          <input type="date" class="disabled" name="opened_on" value="{{r.opened_on}}" disabled/>
 
           <label for="opened_by">Opened By</label>
-          <input type="text" name="opened_by"/>
+          <input type="text" class="disabled" name="opened_by" value="{{r.opened_by}}" disabled/>
         </div>
 
         <div class="pure-u-1 pure-u-md-1-2">
           <label for="closed_on">Closed On</label>
-          <input type="date" name="closed_on"/>
+          <input type="date" class="disabled" name="closed_on" value="{{r.closed_on}}" disabled/>
 
           <label for="closed_by">Closed By</label>
-          <input type="text" name="closed_by"/>
+          <input type="text" class="disabled" name="closed_by" value="{{r.closed_by}}" disabled/>
         </div>
       </div>
 
       <label for="description">Description</label>
-      <textarea id="outOfGridTextArea" name="description" rows="3" wrap="soft" maxlength="2500"></textarea>
+      <textarea id="outOfGridTextArea" class="disabled" name="description" rows="3" wrap="soft" disabled>{{r.description}}</textarea>
 
-      <button type="submit" class="pure-button pure-button-primary" style="text-align: center;">Submit</button>
     </fieldset>
   </form>
 </div>
 
+{% endblock %}
+
+
+{% block scripts %}
+<script type="text/javascript">
+  
+
+</script>
 {% endblock %}

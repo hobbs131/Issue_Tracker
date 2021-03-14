@@ -10,16 +10,16 @@
 <table class="pure-table" id="issueTable">
 	<thead style = "border-right-style: hidden">
 		<tr id="issueTableHeaders">
-			<th onclick="reorder('id');" style="min-width: 40px">ID</th>
-			<th onclick="reorder('issue');">Issue</th>
-			<th onclick="reorder('priority');"  style="min-width: 80px">Priority</th>
-			<th onclick="reorder('opened_on');">Opened On</th>
-			<th onclick="reorder('opened_by');">Opened By</th>
-			<th onclick="reorder('assignee');">Assignee</th>
-			<th onclick="reorder('closed_on');">Closed On</th>
-			<th onclick="reorder('closed_by');">Closed By</th>
-			<th onclick="reorder('status');">Status</th>
-			<th> </th>
+			<th class="priority-2" onclick="reorder('id');" style="min-width: 40px">ID</th>
+			<th class="priority-0" onclick="reorder('issue');">Issue</th>
+			<th class="priority-2" onclick="reorder('priority');"  style="min-width: 80px">Priority</th>
+			<th class="priority-4" onclick="reorder('opened_on');">Opened On</th>
+			<th class="priority-3" onclick="reorder('opened_by');">Opened By</th>
+			<th class="priority-1" onclick="reorder('assignee');">Assignee</th>
+			<th class="priority-4" onclick="reorder('closed_on');">Closed On</th>
+			<th class="priority-3" onclick="reorder('closed_by');">Closed By</th>
+			<th class="priority-1" onclick="reorder('status');">Status</th>
+			<th class="priority-0"> </th>
 		</tr>
 	</thead>
 	<tbody>
@@ -28,30 +28,33 @@
 
 	{% for r in results %}
 		<tr>
-			<td> {{r.id}} </td>
-			<td> <textarea class = "disabled" name = "text" rows = "5" cols="18" wrap = "soft" disabled>{{r.issue}}</textarea></td>
-			<td> <select class = "disabled" disabled>
+			<td class="priority-2"> {{r.id}} </td>
+			<td class="priority-0"> <textarea class = "disabled" name = "text" rows = "5" cols="18" wrap = "soft" disabled>{{r.issue}}</textarea></td>
+			<td class="priority-2"> <select class = "disabled" disabled>
 			{% for p in prio %}
 				<option value = "{{p}}" {% if r.priority == p %}selected{% endif %}>{{p}}</option>
 			{% endfor %}
 			</select></td>
-			<td> <input class = "disabled" type = "date" value="{{r.opened_on}}" disabled size="10"/> </td>
-			<td> <input class = "disabled" type = "text" value = "{{r.opened_by}}" disabled size="10"/> </td>
-			<td> <input class = "disabled" type = "text" value = "{{r.assignee}}" disabled size="10"/> </td>
-			<td> <input class = "disabled" type = "date" value="{{r.closed_on}}" disabled size="10"/> </td>
-			<td> <input class = "disabled" type = "text" value = "{{r.closed_by}}" disabled size="10"/> </td>
-			<td> <select class = "disabled" disabled>
+			<td class="priority-4"> <input class = "disabled" type = "date" value="{{r.opened_on}}" disabled size="10"/> </td>
+			<td class="priority-3"> <input class = "disabled" type = "text" value = "{{r.opened_by}}" disabled size="10"/> </td>
+			<td class="priority-1"> <input class = "disabled" type = "text" value = "{{r.assignee}}" disabled size="10"/> </td>
+			<td class="priority-4"> <input class = "disabled" type = "date" value="{{r.closed_on}}" disabled size="10"/> </td>
+			<td class="priority-3"> <input class = "disabled" type = "text" value = "{{r.closed_by}}" disabled size="10"/> </td>
+			<td class="priority-1"> <select class = "disabled" disabled>
 			{% for s in status %}
 				<option value = "{{s}}" {% if r.status == s %}selected{% endif %}>{{s}}</option>
 			{% endfor %}
 			</select></td>
-			<td class = "buttons">
-				<button class="edit-button" style="width:32px" onclick="editIssue({{r.id}},this.parentElement.parentElement)">
+			<td class = "buttons priority-0">
+				<button class="search-button" style="width:32px" onclick="viewIssue({{r.id}});">
+					<i class="fa fa-search"></i>
+				</button><br>
+				<button class="edit-button" style="width:32px" onclick="editIssue({{r.id}},this.parentElement.parentElement);">
 					<i class="fa fa-edit"></i>
-				</button>
+				</button><br>
 				<button class="delete-button" style="width:32px" onclick="deleteIssue({{r.id}},this.parentElement.parentElement);">
 					<i class="fa fa-trash"></i>
-				</button>
+				</button><br>
 			</td>
 		</tr>
 	{% endfor %}
@@ -155,14 +158,20 @@ function showClosed() {
 	window.location = "issues?" + urlParams.toString();
 }
 
+function viewIssue(id) {
+	console.log(id);
+	window.location = "view_issue?id=" + id;
+
+}
+
 function editIssue(id,row) {
 	cells = row.children
 	for(i = 1;i<9;i++){
 		cells[i].children[0].disabled = false;
 		cells[i].children[0].className="";
 	}
-	cells[9].children[0].innerHTML="<i class=\"fa fa-save\"></i>";
-	cells[9].children[0].setAttribute("onClick","saveIssue("+id+",this.parentElement.parentElement)");
+	cells[9].children[2].innerHTML="<i class=\"fa fa-save\"></i>";
+	cells[9].children[2].setAttribute("onClick","saveIssue("+id+",this.parentElement.parentElement)");
 }
 
 function saveIssue(id,row){
@@ -171,8 +180,8 @@ function saveIssue(id,row){
 		cells[i].children[0].disabled = true;
 		cells[i].children[0].className="disabled";
 	}
-	cells[9].children[0].innerHTML="<i class=\"fa fa-edit\"></i>";
-	cells[9].children[0].setAttribute("onClick","editIssue("+id+",this.parentElement.parentElement)");
+	cells[9].children[2].innerHTML="<i class=\"fa fa-edit\"></i>";
+	cells[9].children[2].setAttribute("onClick","editIssue("+id+",this.parentElement.parentElement)");
 	$.post("/edit_issue",{
 		"id": 		 id,
 		"issue": 	 cells[1].children[0].value,
@@ -213,4 +222,4 @@ function searchTable(){
 }
 
 </script>
-{%endblock %}
+{% endblock %}
