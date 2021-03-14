@@ -2,7 +2,7 @@
 {% block title %}Issues{% endblock %}
 {% block content %}
 
-<input type="text" id="search" onkeyup="searchTable()" placeholder="Search Issues"><br>
+<input type="text" id="search" onkeyup="searchTable()" placeholder="&#128269 Search Issues"><br>
 
 <table class="pure-table" id="issueTable">
 	<thead style = "border-right-style: hidden">
@@ -16,7 +16,7 @@
 			<th onclick="reorder('closed_on');">Closed On</th>
 			<th onclick="reorder('closed_by');">Closed By</th>
 			<th onclick="reorder('status');">Status</th>
-			<th class = "button-header"> </th>
+			<th> </th>
 		</tr>
 	</thead>
 	<tbody>
@@ -26,27 +26,27 @@
 	{% for r in results %}
 		<tr>
 			<td> {{r.id}} </td>
-			<td> <input class = "disabled" type = "text" value = "{{r.issue}}" disabled /> </td>
+			<td> <textarea class = "disabled" name = "text" rows = "5" cols="18" wrap = "soft" disabled>{{r.issue}}</textarea></td>
 			<td> <select class = "disabled" disabled>
 			{% for p in prio %}
 				<option value = "{{p}}" {% if r.priority == p %}selected{% endif %}>{{p}}</option>
 			{% endfor %}
 			</select></td>
-			<td> <input class = "disabled" type = "date" value="{{r.opened_on}}" disabled /> </td>
-			<td> <input class = "disabled" type = "text" value = "{{r.opened_by}}" disabled /> </td>
-			<td> <input class = "disabled" type = "text" value = "{{r.assignee}}" disabled /> </td>
-			<td> <input class = "disabled" type = "date" value="{{r.closed_on}}" disabled /> </td>
-			<td> <input class = "disabled" type = "text" value = "{{r.closed_by}}" disabled /> </td>
+			<td> <input class = "disabled" type = "date" value="{{r.opened_on}}" disabled size="10"/> </td>
+			<td> <input class = "disabled" type = "text" value = "{{r.opened_by}}" disabled size="10"/> </td>
+			<td> <input class = "disabled" type = "text" value = "{{r.assignee}}" disabled size="10"/> </td>
+			<td> <input class = "disabled" type = "date" value="{{r.closed_on}}" disabled size="10"/> </td>
+			<td> <input class = "disabled" type = "text" value = "{{r.closed_by}}" disabled size="10"/> </td>
 			<td> <select class = "disabled" disabled>
 			{% for s in status %}
 				<option value = "{{s}}" {% if r.status == s %}selected{% endif %}>{{s}}</option>
 			{% endfor %}
 			</select></td>
 			<td class = "buttons">
-				<button class="edit-button" onclick="editIssue({{r.id}},this.parentElement.parentElement)">
+				<button class="edit-button" style="width:32px" onclick="editIssue({{r.id}},this.parentElement.parentElement)">
 					<i class="fa fa-edit"></i>
 				</button>
-				<button class="delete-button" onclick="deleteIssue({{r.id}},this.parentElement.parentElement);">
+				<button class="delete-button" style="width:32px" onclick="deleteIssue({{r.id}},this.parentElement.parentElement);">
 					<i class="fa fa-trash"></i>
 				</button>
 			</td>
@@ -55,6 +55,16 @@
 
 	</tbody>
 </table>
+
+<div id="menu">
+	<div class="pure-menu">
+		<ul class="pure-menu-horizontal">
+			<li class="pure-menu-item" id = "addissue">
+				<a href="{{ url_for("add_issue") }}" class="pure-menu-link">+ Add Issue</a>
+			</li>
+		</ul>
+	</div>
+</div>
 {% endblock %}
 
 {% block scripts %}
@@ -83,17 +93,17 @@ function setOrderIcon() {
 	}
 	console.log(column);
 
-	var order = 'desc';
+	var order = 'asc';
 	if (urlParams.has('order')) {
-		order = urlParams.get('order-by');
+		order = urlParams.get('order');
 	}
 
 	var headers = document.getElementById("issueTableHeaders").cells;
 
-	if (order = 'asc') {
-		headers[column].innerHTML += "<i class='fa fa-arrow-down' aria-hidden='true' style='float:right'></i>"
-	} else {
+	if (order == 'asc') {
 		headers[column].innerHTML += "<i class='fa fa-arrow-up' aria-hidden='true' style='float:right'></i>"
+	} else {
+		headers[column].innerHTML += "<i class='fa fa-arrow-down' aria-hidden='true' style='float:right'></i>"
 	}
 
 	//<i class="fa fa-arrow-up" aria-hidden="true" style="visibility:hidden"></i>
@@ -103,8 +113,23 @@ function setOrderIcon() {
 $('document').ready(setOrderIcon);
 
 function reorder(name) {
+	var urlParams = new URLSearchParams(window.location.search);
+	var order = 'asc';
+	if (urlParams.has('order-by')) {
+		var column = urlParams.get('order-by');
+		if (column == name) {
+			order = urlParams.get('order');
+			if (order == 'asc') {
+				order = 'desc';
+			} else {
+				order = 'asc';
+			}
+		}
+	} else {
+		order = 'desc';
+	}
 	console.log(name);
-	window.location = "issues?order-by=" + name;
+	window.location = "issues?order-by=" + name + "&order=" + order;
 }
 
 function editIssue(id,row) {

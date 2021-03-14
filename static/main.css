@@ -1,23 +1,15 @@
-body #menu {
-    border-bottom: 2px lightblue solid;
-    background-color: rgba(10, 169, 255, 0.25);
-}
-
-body div#content {
+body div #content {
     padding:1em;
 }
 
 body #search {
   min-width: 250px;
-  margin: 25px 5px;
+  margin: 5px 2.5%;
+  border-radius: 8px;
+  border: 1px solid grey;
 }
 
 .buttons {
-	border: hidden;
-}
-
-.button-header {
-	visibility: collapse;
 	border: hidden;
 }
 
@@ -39,6 +31,94 @@ select.disabled::-ms-expand {
   display: none;
 }
 
-.pure-form label, .pure-form button {
+#issueTableHeaders th {
+  border: none;
+}
+
+#issueTable td {
+  border: none;
+}
+
+#issueTable tbody tr:nth-child(even){
+  background-color: whitesmoke;
+}
+
+#issueTable tbody tr:nth-child(odd){
+  background-color: mintcream;
+}
+
+#issueTable {
+  border: none;
+  width: 95%;
+  margin:auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#logout, #login {
+  float:right;
+  margin: 0 5%;
+}
+
+#addissue {
+  background-color: whitesmoke;
+  border-radius: 8px;
+}
+
+.headertext {
+  font-family: "Lucida Console", monospace;
+  font-size: xxx-large;
+  margin: 0;
+}
+
+.subtitle {
+  margin: 5px;
+  margin-bottom: 20px;
+}
+
+.add_issue_div {
+  background-color: whitesmoke;
+  display: block;
+  text-align: center;
+  border-radius: 8px;
+  width: 500px;
+  margin: auto;
+}
+
+.pure-u-1 {
+  margin-top: 15px;
+}
+
+#addissueform {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+#addissueform label {
+  margin-top: 15px;
+}
+
+#addissueform input{
+  width: 400px;
+}
+
+#addissueform select{
+  width: 400px;
+}
+
+#addissueform button {
+  display: block;
+  margin: auto;
+  width: 200px;
+  background-color: cadetblue;
   margin-top: 25px;
+}
+
+#addissueform legend {
+  display: block;
+  margin: auto;
+  font-size: 20px;
+  text-align: center;
 }
