@@ -138,6 +138,11 @@ select.disabled::-ms-expand {
   margin-left: auto;
   margin-right: auto;
   text-align: left;
+  max-width: 1200px;
+}
+
+#issue_div {
+  text-align: center;
 }
 
 #issueForm label {
@@ -149,21 +154,21 @@ select.disabled::-ms-expand {
 
 #inGridTextArea {
   min-width: 200px;
-  max-width: 450px;
+  max-width: 550px;
   width: 90%;
   margin: 0px 5%;
 }
 
 #issueForm input {
   min-width: 200px;
-  max-width: 450px;
+  max-width: 550px;
   width: 90%;
   margin: 0px 5%;
 }
 
 #issueForm select {
   min-width: 200px;
-  max-width: 450px;
+  max-width: 550px;
   width: 90%;
   margin: 0px 5%;
 }
@@ -185,6 +190,17 @@ select.disabled::-ms-expand {
 
 #outOfGridTextArea {
   min-width: 200px;
-  width: 90%;
-  margin: 0px 5%;
+  width: 100%;
+  margin: 0px 2.5%;
+  max-width: 1140px;
+}
+
+footer {
+  margin:auto;
+  text-align: center;
+  color: grey;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: whitesmoke;
 }

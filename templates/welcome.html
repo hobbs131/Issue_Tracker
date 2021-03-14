@@ -14,26 +14,30 @@
 
   <body>
    	<div class="jumbotron" style="background: cadetblue !important">
-        <h1>Welcome to Issue Tracker</h1>
-        <p>Either login to have full functionality, or continue to website with limited functionality</p>
-        <br/>
-        <p>Functionality:</p>
-        <ul style="list-style-position: inside">
-          <li> Search </li>
-          <li> Edit (user) </li>
-          <li> Delete (user) </li>
-          <li> Sort </li>
-        </ul>
-        <br/>
+        <h1 style="font-family: 'lucida console', monospace;">Welcome to Issue Tracker!</h1>
+        <p>Either login to for full functionality, or continue to website with limited functionality.</p>
+        <!--<br/>
+        <div style="margin:auto; ">
+          <p>functionality includes:</p>
+          <ul style="list-style-position: inside; text-align:left; margin: auto; width: 10%;">
+            <li> Search </li>
+            <li> Edit (user) </li>
+            <li> Delete (user) </li>
+            <li> Sort </li>
+          </ul>
+          <br/>
+        </div>-->
+
       </div>
 
       <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10">
-          <button id= "myButton" type="button" class="btn btn-primary btn-block" onclick="location.href ='/login'">
+          <button id= "myButton" type="button" class="btn btn-primary btn-block" style="width: 30%; background-color: whitesmoke; margin: auto; border:none; color: grey;" onclick="location.href ='/login'">
             Login
           </button>
-          <button id= "myButton1" type="button" class="btn btn-primary btn-block" onclick="location.href ='/issues_guest'">
+          <br>
+          <button id= "myButton1" type="button" class="btn btn-primary btn-block" style="width: 30%; background-color: whitesmoke; margin: auto; border:none; color: grey;" onclick="location.href ='/issues_guest'">
             Continue to Website
           </button>
         </div>
