@@ -85,11 +85,6 @@ select.disabled::-ms-expand {
   margin: auto;
 }
 
-@media screen and (min-width: 55em) {
-  .pure-u-md-1-2, .pure-u-md-12-24 {
-      width: 50%;
-  }
-}
 
 
 .pure-u-1 {
@@ -98,6 +93,7 @@ select.disabled::-ms-expand {
 }
 
 #addissueform {
+  width: 100%;
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
@@ -105,15 +101,31 @@ select.disabled::-ms-expand {
 }
 
 #addissueform label {
-  margin-top: 15px;
+  min-width: 200px;
+  max-width: 450px;
+  width: 90%;
+  margin: 15px 5% 5px;
 }
 
-#addissueform input{
-  width: 400px;
+#addissueform textarea {
+  min-width: 200px;
+  max-width: 450px;
+  width: 90%;
+  margin: 0px 5%;
 }
 
-#addissueform select{
-  width: 400px;
+#addissueform input {
+  min-width: 200px;
+  max-width: 450px;
+  width: 90%;
+  margin: 0px 5%;
+}
+
+#addissueform select {
+  min-width: 200px;
+  max-width: 450px;
+  width: 90%;
+  margin: 0px 5%;
 }
 
 #addissueform button {
