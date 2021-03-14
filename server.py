@@ -58,9 +58,15 @@ def home():
 def issues():
 	order_by = request.args.get('order-by', 'id')
 	order = request.args.get('order', 'asc')
+	hide_closed = request.args.get('hide-closed', 'false')
+
+	if (hide_closed == "true"):
+		hide_closed = "AND status NOT LIKE 'Closed'"
+	else:
+		hide_closed = ""
 
 	with db.get_db_cursor(True) as cur:
-		cur.execute("SELECT json_agg(elem) FROM (SELECT * FROM issues WHERE deletedAt IS NULL ORDER BY {order_by} {order}) as elem".format(order_by=order_by, order=order))
+		cur.execute("SELECT json_agg(elem) FROM (SELECT * FROM issues WHERE deletedAt IS NULL {hide_closed} ORDER BY {order_by} {order}) as elem".format(hide_closed=hide_closed, order_by=order_by, order=order))
 		results = cur.fetchone()[0]
 		if (results != None):
 			return render_template('issues.html', results=results)

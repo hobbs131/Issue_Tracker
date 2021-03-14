@@ -2,7 +2,10 @@
 {% block title %}Issues{% endblock %}
 {% block content %}
 
-<input type="text" id="search" onkeyup="searchTable()" placeholder="&#128269 Search Issues"><br>
+<div id="table_options_div">
+	<input type="text" id="search" onkeyup="searchTable()" placeholder="&#128269 Search Issues">
+</div>
+<br>
 
 <table class="pure-table" id="issueTable">
 	<thead style = "border-right-style: hidden">
@@ -84,14 +87,11 @@ var headerDict = {
 
 function setOrderIcon() {
 	var urlParams = new URLSearchParams(window.location.search);
-	console.log(urlParams.has('order-by'));
-	console.log(urlParams.get('order-by'));
 
 	var column = 0;
 	if (urlParams.has('order-by')) {
 		column = headerDict[urlParams.get('order-by')];
 	}
-	console.log(column);
 
 	var order = 'asc';
 	if (urlParams.has('order')) {
@@ -110,7 +110,19 @@ function setOrderIcon() {
 	//<i class="fa fa-arrow-down" aria-hidden="true" style="visibility:hidden"></i>
 }
 
+function setTableOptions() {
+	var urlParams = new URLSearchParams(window.location.search);
+
+	var optionsDiv = document.getElementById("table_options_div");
+	if (urlParams.has('hide-closed') && urlParams.get('hide-closed') == "true") {
+		optionsDiv.innerHTML += "<button type='button' class='pure-button pure-button secondary' onclick='showClosed();'>Show closed issues</button>"
+	} else {
+		optionsDiv.innerHTML += "<button type='button' class='pure-button pure-button secondary' onclick='hideClosed();'>Hide closed issues</button>"
+	}
+}
+
 $('document').ready(setOrderIcon);
+$('document').ready(setTableOptions);
 
 function reorder(name) {
 	var urlParams = new URLSearchParams(window.location.search);
@@ -128,8 +140,21 @@ function reorder(name) {
 	} else {
 		order = 'desc';
 	}
-	console.log(name);
 	window.location = "issues?order-by=" + name + "&order=" + order;
+}
+
+function hideClosed() {
+	var urlParams = new URLSearchParams(window.location.search);
+	urlParams.set('hide-closed', 'true');
+	console.log(urlParams.toString())
+	window.location = "issues?" + urlParams.toString();
+}
+
+function showClosed() {
+	var urlParams = new URLSearchParams(window.location.search);
+	urlParams.set('hide-closed', 'false');
+	console.log(urlParams.toString())
+	window.location = "issues?" + urlParams.toString();
 }
 
 function editIssue(id,row) {

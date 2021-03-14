@@ -85,8 +85,16 @@ select.disabled::-ms-expand {
   margin: auto;
 }
 
+@media screen and (min-width: 55em) {
+  .pure-u-md-1-2, .pure-u-md-12-24 {
+      width: 50%;
+  }
+}
+
+
 .pure-u-1 {
   margin-top: 15px;
+  float: center;
 }
 
 #addissueform {
