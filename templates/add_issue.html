@@ -1,26 +1,37 @@
 {% extends "parent.html" %}
 {% block title %}Add an Issue{% endblock %}
 {% block content %}
-<form class="pure-form pure-form-stacked" method = "post" action = "postIssueEntry">
+<div class="add_issue_div">
+  <form class="pure-form pure-form-stacked" id="addissueform" method = "post" action = "postIssueEntry">
     <fieldset>
-        <legend>Add Issue</legend>
-        <label for="issue">Issue</label>
-        <input type="text" name = "issue" />
-        <label for="priority">Priority</label>
-        <input type="text" name = "priority" />
-        <label for="opened_on">Opened On</label>
-        <input type="text" name = "opened_on" />
-        <label for="opened_by">Opened By</label>
-        <input type="text" name = "opened_by" />
-        <label for="assignee">Assignee</label>
-        <input type="text" name = "assignee" />
-        <label for="closed_on">Closed On</label>
-        <input type="text" name = "closed_on" />
-        <label for="closed_by">Closed By</label>
-        <input type="text" name = "closed_by" />
-        <label for="status">Status</label>
-        <input type="text" name = "status" />
-        <button type="submit" class="pure-button pure-button-primary">Submit</button>
+      <legend>Add an Issue!</legend>
+      <label for="issue">Issue</label>
+      <textarea name = "issue" rows = "2" cols="45" wrap = "soft"></textarea>
+      <label for="priority">Priority</label>
+      <select name = "priority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+        <option value="urgent">Urgent</option>
+      </select>
+      <label for="opened_on">Opened On</label>
+      <input type="date" name = "opened_on" />
+      <label for="opened_by">Opened By</label>
+      <input type="text" name = "opened_by" />
+      <label for="assignee">Assignee</label>
+      <input type="text" name = "assignee" />
+      <label for="status">Status</label>
+      <select name = "status">
+        <option value="low">Open</option>
+        <option value="medium">Closed</option>
+      </select>
+      <label for="closed_on">Closed On</label>
+      <input type="date" name = "closed_on" />
+      <label for="closed_by">Closed By</label>
+      <input type="text" name = "closed_by" />
+      <button type="submit" class="pure-button pure-button-primary" style="text-align: center;">Submit</button>
     </fieldset>
-</form>
+  </form>
+</div>
+
 {% endblock %}

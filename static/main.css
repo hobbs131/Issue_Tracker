@@ -6,6 +6,7 @@ body #search {
   min-width: 250px;
   margin: 5px 2.5%;
   border-radius: 8px;
+  border: 1px solid grey;
 }
 
 .buttons {
@@ -73,4 +74,43 @@ select.disabled::-ms-expand {
 .subtitle {
   margin: 5px;
   margin-bottom: 20px;
+}
+
+.add_issue_div {
+  background-color: whitesmoke;
+  display: block;
+  text-align: center;
+  border-radius: 8px;
+  width: 500px;
+  margin: auto;
+}
+
+#addissueform {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+#addissueform input{
+  width: 400px;
+}
+
+#addissueform select{
+  width: 400px;
+}
+
+#addissueform button {
+  display: block;
+  margin: auto;
+  width: 200px;
+  background-color: cadetblue;
+  margin-top: 10px;
+}
+
+#addissueform legend {
+  display: block;
+  margin: auto;
+  font-size: 20px;
+  text-align: center;
 }
