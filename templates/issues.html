@@ -170,8 +170,8 @@ function editIssue(id,row) {
 		cells[i].children[0].disabled = false;
 		cells[i].children[0].className="";
 	}
-	cells[9].children[0].innerHTML="<i class=\"fa fa-save\"></i>";
-	cells[9].children[0].setAttribute("onClick","saveIssue("+id+",this.parentElement.parentElement)");
+	cells[9].children[2].innerHTML="<i class=\"fa fa-save\"></i>";
+	cells[9].children[2].setAttribute("onClick","saveIssue("+id+",this.parentElement.parentElement)");
 }
 
 function saveIssue(id,row){
@@ -180,8 +180,8 @@ function saveIssue(id,row){
 		cells[i].children[0].disabled = true;
 		cells[i].children[0].className="disabled";
 	}
-	cells[9].children[0].innerHTML="<i class=\"fa fa-edit\"></i>";
-	cells[9].children[0].setAttribute("onClick","editIssue("+id+",this.parentElement.parentElement)");
+	cells[9].children[2].innerHTML="<i class=\"fa fa-edit\"></i>";
+	cells[9].children[2].setAttribute("onClick","editIssue("+id+",this.parentElement.parentElement)");
 	$.post("/edit_issue",{
 		"id": 		 id,
 		"issue": 	 cells[1].children[0].value,

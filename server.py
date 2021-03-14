@@ -106,7 +106,7 @@ def postIssueEntry():
 		closed_by = request.form.get('closed_by')
 		status = request.form.get('status')
 		description = request.form.get('description')
-		cur.execute("INSERT INTO issues (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status, description))
+		cur.execute("INSERT INTO issues (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status, description) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status, description))
 		return redirect('/issues')
 
 @app.route('/edit_issue', methods = ["POST"])
