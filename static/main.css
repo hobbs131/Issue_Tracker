@@ -38,3 +38,7 @@ select.disabled {
 select.disabled::-ms-expand {
   display: none;
 }
+
+.pure-form label, .pure-form button {
+  margin-top: 25px;
+}
