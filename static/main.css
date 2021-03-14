@@ -73,6 +73,30 @@ select.disabled::-ms-expand {
   overflow: hidden;
 }
 
+@media screen and (max-width: 1225px) and (min-width: 1075px) {
+  .priority-4 {
+    display:none
+  }
+}
+
+@media screen and (max-width: 1075px) and (min-width: 700px) {
+  .priority-4, .priority-3 {
+    display:none
+  }
+}
+
+@media screen and (max-width: 700px) and (min-width: 500px) {
+  .priority-4, .priority-3, .priority-2 {
+    display:none
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .priority-4, .priority-3, .priority-2, .priority-1 {
+    display:none
+  }
+}
+
 #logout, #login {
   float:right;
   margin: 0 5%;
