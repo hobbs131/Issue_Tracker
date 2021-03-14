@@ -13,7 +13,7 @@
 
         <div class="pure-u-1 pure-u-md-1-2">
           <label for="issue">Issue</label>
-          <textarea name = "issue" rows = "2" cols="45" wrap = "soft"></textarea>
+          <textarea id="inGridTextArea" name="issue" rows="2" cols="45" wrap="soft"></textarea>
 
           <label for="priority">Priority</label>
           <select name = "priority">
@@ -51,6 +51,9 @@
           <input type="text" name = "closed_by" />
         </div>
       </div>
+
+      <label for="description">Description</label>
+      <textarea id="outOfGridTextArea" name="description" rows="3" wrap="soft"></textarea>
 
       <button type="submit" class="pure-button pure-button-primary" style="text-align: center;">Submit</button>
     </fieldset>

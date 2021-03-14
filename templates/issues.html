@@ -3,7 +3,7 @@
 {% block content %}
 
 <div id="table_options_div">
-	<input type="text" id="search" onkeyup="searchTable()" placeholder="&#128269 Search Issues">
+	<input type="text" id="searchBar" onkeyup="searchTable()" placeholder="&#128269 Search Issues">
 </div>
 <br>
 
@@ -146,14 +146,12 @@ function reorder(name) {
 function hideClosed() {
 	var urlParams = new URLSearchParams(window.location.search);
 	urlParams.set('hide-closed', 'true');
-	console.log(urlParams.toString())
 	window.location = "issues?" + urlParams.toString();
 }
 
 function showClosed() {
 	var urlParams = new URLSearchParams(window.location.search);
 	urlParams.set('hide-closed', 'false');
-	console.log(urlParams.toString())
 	window.location = "issues?" + urlParams.toString();
 }
 
@@ -197,14 +195,14 @@ function deleteIssue(id, row) {
 
 function searchTable(){
 	var input, filter, table, tr, td, i, txtValue;
-	input = document.getElementById("search").value;
+	input = document.getElementById("searchBar").value;
 	filter = input.toUpperCase();
 	table = document.getElementById("issueTable");
 	tr = table.getElementsByTagName("tr");
 	for (i = 0; i < tr.length; i++) {
     td = tr[i].getElementsByTagName("td")[1];
     if (td) {
-			txtValue = td.getElementsByTagName('input')[0].value;
+			txtValue = td.getElementsByTagName('textarea')[0].value;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
         tr[i].style.display = "";
       } else {

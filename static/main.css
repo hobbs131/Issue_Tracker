@@ -107,9 +107,15 @@ select.disabled::-ms-expand {
   margin: 15px 5% 5px;
 }
 
-#addissueform textarea {
+#inGridTextArea {
   min-width: 200px;
   max-width: 450px;
+  width: 90%;
+  margin: 0px 5%;
+}
+
+#outOfGridTextArea {
+  min-width: 200px;
   width: 90%;
   margin: 0px 5%;
 }
