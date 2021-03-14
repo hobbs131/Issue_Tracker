@@ -1,0 +1,159 @@
+{% extends "parent.html" %}
+{% block title %}Issues{% endblock %}
+{% block content %}
+
+<div id="table_options_div">
+	<input type="text" id="searchBar" onkeyup="searchTable()" placeholder="&#128269 Search Issues">
+</div>
+<br>
+
+<table class="pure-table" id="issueTable">
+	<thead style = "border-right-style: hidden">
+		<tr id="issueTableHeaders">
+			<th onclick="reorder('id');" style="min-width: 40px">ID</th>
+			<th onclick="reorder('issue');">Issue</th>
+			<th onclick="reorder('priority');"  style="min-width: 80px">Priority</th>
+			<th onclick="reorder('opened_on');">Opened On</th>
+			<th onclick="reorder('opened_by');">Opened By</th>
+			<th onclick="reorder('assignee');">Assignee</th>
+			<th onclick="reorder('closed_on');">Closed On</th>
+			<th onclick="reorder('closed_by');">Closed By</th>
+			<th onclick="reorder('status');">Status</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% set prio = ["Low","Medium","High","Urgent"] %}
+	{% set status = ["Open","Closed","In Progress"] %}
+
+	{% for r in results %}
+		<tr>
+			<td> {{r.id}} </td>
+			<td> <textarea class = "disabled" name = "text" rows = "5" cols="18" wrap = "soft" disabled>{{r.issue}}</textarea></td>
+			<td> <select class = "disabled" disabled>
+			{% for p in prio %}
+				<option value = "{{p}}" {% if r.priority == p %}selected{% endif %}>{{p}}</option>
+			{% endfor %}
+			</select></td>
+			<td> <input class = "disabled" type = "date" value="{{r.opened_on}}" disabled size="10"/> </td>
+			<td> <input class = "disabled" type = "text" value = "{{r.opened_by}}" disabled size="10"/> </td>
+			<td> <input class = "disabled" type = "text" value = "{{r.assignee}}" disabled size="10"/> </td>
+			<td> <input class = "disabled" type = "date" value="{{r.closed_on}}" disabled size="10"/> </td>
+			<td> <input class = "disabled" type = "text" value = "{{r.closed_by}}" disabled size="10"/> </td>
+			<td> <select class = "disabled" disabled>
+			{% for s in status %}
+				<option value = "{{s}}" {% if r.status == s %}selected{% endif %}>{{s}}</option>
+			{% endfor %}
+			</select></td>
+		</tr>
+	{% endfor %}
+
+	</tbody>
+</table>
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+
+var headerDict = {
+	"id": 0,
+	"issue": 1,
+	"priority": 2,
+	"opened_on": 3,
+	"opened_by": 4,
+	"assignee": 5,
+	"closed_on": 6,
+	"closed_by": 7,
+	"status": 8
+}
+
+function setOrderIcon() {
+	var urlParams = new URLSearchParams(window.location.search);
+
+	var column = 0;
+	if (urlParams.has('order-by')) {
+		column = headerDict[urlParams.get('order-by')];
+	}
+
+	var order = 'asc';
+	if (urlParams.has('order')) {
+		order = urlParams.get('order');
+	}
+
+	var headers = document.getElementById("issueTableHeaders").cells;
+
+	if (order == 'asc') {
+		headers[column].innerHTML += "<i class='fa fa-arrow-up' aria-hidden='true' style='float:right'></i>"
+	} else {
+		headers[column].innerHTML += "<i class='fa fa-arrow-down' aria-hidden='true' style='float:right'></i>"
+	}
+
+	//<i class="fa fa-arrow-up" aria-hidden="true" style="visibility:hidden"></i>
+	//<i class="fa fa-arrow-down" aria-hidden="true" style="visibility:hidden"></i>
+}
+
+function setTableOptions() {
+	var urlParams = new URLSearchParams(window.location.search);
+
+	var optionsDiv = document.getElementById("table_options_div");
+	if (urlParams.has('hide-closed') && urlParams.get('hide-closed') == "true") {
+		optionsDiv.innerHTML += "<button type='button' class='pure-button pure-button secondary' onclick='showClosed();'>Show closed issues</button>"
+	} else {
+		optionsDiv.innerHTML += "<button type='button' class='pure-button pure-button secondary' onclick='hideClosed();'>Hide closed issues</button>"
+	}
+}
+
+$('document').ready(setOrderIcon);
+$('document').ready(setTableOptions);
+
+function reorder(name) {
+	var urlParams = new URLSearchParams(window.location.search);
+	var order = 'asc';
+	if (urlParams.has('order-by')) {
+		var column = urlParams.get('order-by');
+		if (column == name) {
+			order = urlParams.get('order');
+			if (order == 'asc') {
+				order = 'desc';
+			} else {
+				order = 'asc';
+			}
+		}
+	} else {
+		order = 'desc';
+	}
+	window.location = "issues?order-by=" + name + "&order=" + order;
+}
+
+function hideClosed() {
+	var urlParams = new URLSearchParams(window.location.search);
+	urlParams.set('hide-closed', 'true');
+	window.location = "issues?" + urlParams.toString();
+}
+
+function showClosed() {
+	var urlParams = new URLSearchParams(window.location.search);
+	urlParams.set('hide-closed', 'false');
+	window.location = "issues?" + urlParams.toString();
+}
+
+function searchTable(){
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("searchBar").value;
+	filter = input.toUpperCase();
+	table = document.getElementById("issueTable");
+	tr = table.getElementsByTagName("tr");
+	for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+			txtValue = td.getElementsByTagName('textarea')[0].value;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+		}
+  }
+}
+
+</script>
+{%endblock %}

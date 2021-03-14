@@ -51,8 +51,29 @@ def callback():
 
 @app.route('/')
 def home():
-	 return redirect(url_for('login'))
+	 return redirect(url_for('welcome'))
 
+@app.route('/welcome')
+def welcome():
+	return render_template('welcome.html')
+
+@app.route('/issues_guest')
+def issues_guest():
+	order_by = request.args.get('order-by', 'id')
+	order = request.args.get('order', 'asc')
+	hide_closed = request.args.get('hide-closed', 'false')
+
+	if (hide_closed == "true"):
+		hide_closed = "AND status NOT LIKE 'Closed'"
+	else:
+		hide_closed = ""
+
+	with db.get_db_cursor(True) as cur:
+		cur.execute("SELECT json_agg(elem) FROM (SELECT * FROM issues WHERE deletedAt IS NULL {hide_closed} ORDER BY {order_by} {order}) as elem".format(hide_closed=hide_closed, order_by=order_by, order=order))
+		results = cur.fetchone()[0]
+		if (results != None):
+			return render_template('issues_guest.html', results=results)
+		return render_template('issues_guest.html')
 
 @app.route('/issues')
 def issues():

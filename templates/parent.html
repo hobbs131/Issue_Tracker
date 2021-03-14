@@ -24,8 +24,12 @@
     <div class="pure-menu">
       <ul class="pure-menu-horizontal">
         <li class="pure-menu-item">
+        {% if session.profile %}
           <a href="{{ url_for("issues") }}" class="pure-menu-link">Issue Table</a>
+        {% else %}
+          <a href="{{ url_for("issues_guest") }}" class="pure-menu-link">Issue Table</a>
         </li>
+        {% endif %}
 
         {% if session.profile %}
           <li class="pure-menu-item" id="logout">
