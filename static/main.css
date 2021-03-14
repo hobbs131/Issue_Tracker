@@ -3,7 +3,7 @@ body #menu {
     background-color: rgba(10, 169, 255, 0.25);
 }
 
-body div#content {
+body div #content {
     padding:1em;
 }
 
@@ -13,11 +13,6 @@ body #search {
 }
 
 .buttons {
-	border: hidden;
-}
-
-.button-header {
-	visibility: collapse;
 	border: hidden;
 }
 
@@ -37,4 +32,25 @@ select.disabled {
 
 select.disabled::-ms-expand {
   display: none;
+}
+
+#issueTableHeaders th {
+  border: none;
+}
+
+#issueTable td {
+  border: none;
+}
+
+#issueTable tbody tr:nth-child(even){
+  background-color: whitesmoke;
+}
+
+#issueTable tbody tr:nth-child(odd){
+  background-color: mintcream;
+}
+
+#issueTable {
+  border: none;
+
 }
