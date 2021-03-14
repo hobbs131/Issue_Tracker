@@ -121,19 +121,19 @@ function reorder(name) {
 	} else {
 		order = 'desc';
 	}
-	window.location = "issues?order-by=" + name + "&order=" + order;
+	window.location = "issues_guest?order-by=" + name + "&order=" + order;
 }
 
 function hideClosed() {
 	var urlParams = new URLSearchParams(window.location.search);
 	urlParams.set('hide-closed', 'true');
-	window.location = "issues?" + urlParams.toString();
+	window.location = "issues_guest?" + urlParams.toString();
 }
 
 function showClosed() {
 	var urlParams = new URLSearchParams(window.location.search);
 	urlParams.set('hide-closed', 'false');
-	window.location = "issues?" + urlParams.toString();
+	window.location = "issues_guest?" + urlParams.toString();
 }
 
 function searchTable(){
