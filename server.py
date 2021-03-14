@@ -27,14 +27,16 @@ def login():
 
 @app.route('/logout')
 def logout():
-	session.clear()
-	params = { 'returnTo': url_for('home', _external=True), 'client_id': os.environ['AUTH0_CLIENT_ID'] }
-	return redirect(auth0().api_base_url + '/v2/logout?' + urlencode(params))
+	if 'profile' in session:
+		session.clear()
+		params = { 'returnTo': url_for('home', _external=True), 'client_id': os.environ['AUTH0_CLIENT_ID'] }
+		return redirect(auth0().api_base_url + '/v2/logout?' + urlencode(params))
+	else:
+		return redirect('/')
 
 
 @app.route('/callback')
 def callback():
-	print("callback")
 	auth0().authorize_access_token()
 	resp = auth0().get('userinfo')
 	userinfo = resp.json()
@@ -51,11 +53,13 @@ def callback():
 
 @app.route('/')
 def home():
-	 return redirect(url_for('welcome'))
+	 return redirect('/welcome')
+
 
 @app.route('/welcome')
 def welcome():
 	return render_template('welcome.html')
+
 
 @app.route('/issues_guest')
 def issues_guest():
@@ -75,80 +79,103 @@ def issues_guest():
 			return render_template('issues_guest.html', results=results)
 		return render_template('issues_guest.html')
 
+
 @app.route('/issues')
 def issues():
-	order_by = request.args.get('order-by', 'id')
-	order = request.args.get('order', 'asc')
-	hide_closed = request.args.get('hide-closed', 'false')
+	if 'profile' in session:
+		order_by = request.args.get('order-by', 'id')
+		order = request.args.get('order', 'asc')
+		hide_closed = request.args.get('hide-closed', 'false')
 
-	if (hide_closed == "true"):
-		hide_closed = "AND status NOT LIKE 'Closed'"
+		if (hide_closed == "true"):
+			hide_closed = "AND status NOT LIKE 'Closed'"
+		else:
+			hide_closed = ""
+
+		with db.get_db_cursor(True) as cur:
+			cur.execute("SELECT json_agg(elem) FROM (SELECT * FROM issues WHERE deletedAt IS NULL {hide_closed} ORDER BY {order_by} {order}) as elem".format(hide_closed=hide_closed, order_by=order_by, order=order))
+			results = cur.fetchone()[0]
+			if (results != None):
+				return render_template('issues.html', results=results)
+			return render_template('issues.html')
+
 	else:
-		hide_closed = ""
-
-	with db.get_db_cursor(True) as cur:
-		cur.execute("SELECT json_agg(elem) FROM (SELECT * FROM issues WHERE deletedAt IS NULL {hide_closed} ORDER BY {order_by} {order}) as elem".format(hide_closed=hide_closed, order_by=order_by, order=order))
-		results = cur.fetchone()[0]
-		if (results != None):
-			return render_template('issues.html', results=results)
-		return render_template('issues.html')
+		return redirect('/')
 
 
 @app.route('/add_issue')
 def add_issue():
-	return render_template('add_issue.html')
+	if 'profile' in session:
+		return render_template('add_issue.html')
+	else:
+		return redirect('/')
+
 
 @app.route('/view_issue')
 def view_issue():
+	if 'profile' in session:
+		if 'id' in request.args:
+			id = request.args.get('id')
+			with db.get_db_cursor(True) as cur:
+				cur.execute("SELECT json_agg(issues) FROM issues WHERE id = {id}".format(id=id))
+				results = cur.fetchone()[0]
+				print(results)
+				if (results != None):
+					return render_template('view_issue.html', results=results)
+		return redirect('/issues')
 
-	if 'id' in request.args:
-		id = request.args.get('id')
-		with db.get_db_cursor(True) as cur:
-			cur.execute("SELECT json_agg(issues) FROM issues WHERE id = {id}".format(id=id))
-
-			results = cur.fetchone()[0]
-			print(results)
-			if (results != None):
-				return render_template('view_issue.html', results=results)
-
-	return redirect('/issues')
-
+	else:
+		return redirect('/')
 
 
 @app.route('/postIssueEntry', methods = ["POST"])
 def postIssueEntry():
-	with db.get_db_cursor(True) as cur:
-		issue = request.form.get('issue')
-		priority = request.form.get('priority')
-		opened_on = request.form.get('opened_on')
-		opened_by = request.form.get('opened_by')
-		assignee = request.form.get('assignee')
-		closed_on = request.form.get('closed_on')
-		closed_by = request.form.get('closed_by')
-		status = request.form.get('status')
-		description = request.form.get('description')
-		cur.execute("INSERT INTO issues (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status, description) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status, description))
-		return redirect('/issues')
+	if 'profile' in session:
+		with db.get_db_cursor(True) as cur:
+			issue = request.form.get('issue')
+			priority = request.form.get('priority')
+			opened_on = request.form.get('opened_on')
+			opened_by = request.form.get('opened_by')
+			assignee = request.form.get('assignee')
+			closed_on = request.form.get('closed_on')
+			closed_by = request.form.get('closed_by')
+			status = request.form.get('status')
+			description = request.form.get('description')
+			cur.execute("INSERT INTO issues (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status, description) values (%s,%s,%s,%s,%s,%s,%s,%s,%s)", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status, description))
+			return redirect('/issues')
+
+	else:
+		return redirect('/')
+
 
 @app.route('/edit_issue', methods = ["POST"])
 def editIssueEntry():
-	with db.get_db_cursor(True) as cur:
-		id = int(request.form.get('id'))
-		issue = request.form.get('issue')
-		priority = request.form.get('priority')
-		opened_on = request.form.get('opened_on')
-		opened_by = request.form.get('opened_by')
-		assignee = request.form.get('assignee')
-		closed_on = request.form.get('closed_on')
-		closed_by = request.form.get('closed_by')
-		status = request.form.get('status')
-		print("DEBUG: (\""+str(id)+"\",\""+issue+"\",\""+priority+"\",\""+opened_on+"\",\""+opened_by+"\",\""+assignee+"\",\""+closed_on+"\",\""+closed_by+"\",\""+status+"\")");
-		cur.execute("UPDATE issues SET issue=%s, priority = %s, opened_on = %s, opened_by = %s, assignee = %s, closed_on = %s, closed_by = %s, status = %s WHERE id = %s", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status,id))
-		return ""
+	if 'profile' in session:
+		with db.get_db_cursor(True) as cur:
+			id = int(request.form.get('id'))
+			issue = request.form.get('issue')
+			priority = request.form.get('priority')
+			opened_on = request.form.get('opened_on')
+			opened_by = request.form.get('opened_by')
+			assignee = request.form.get('assignee')
+			closed_on = request.form.get('closed_on')
+			closed_by = request.form.get('closed_by')
+			status = request.form.get('status')
+			print("DEBUG: (\""+str(id)+"\",\""+issue+"\",\""+priority+"\",\""+opened_on+"\",\""+opened_by+"\",\""+assignee+"\",\""+closed_on+"\",\""+closed_by+"\",\""+status+"\")");
+			cur.execute("UPDATE issues SET issue=%s, priority = %s, opened_on = %s, opened_by = %s, assignee = %s, closed_on = %s, closed_by = %s, status = %s WHERE id = %s", (issue, priority, opened_on, opened_by, assignee, closed_on, closed_by, status,id))
+			return ""
+
+	else:
+		return redirect('/')
+
 
 @app.route('/delete_issue', methods = ["POST"])
 def deleteIssueEntry():
-	with db.get_db_cursor(True) as cur:
-		id = int(request.form.get('id'))
-		cur.execute("UPDATE issues SET  deletedAt = now()  WHERE  id = %s" % id)
-		return ""
+	if 'profile' in session:
+		with db.get_db_cursor(True) as cur:
+			id = int(request.form.get('id'))
+			cur.execute("UPDATE issues SET  deletedAt = now()  WHERE  id = %s" % id)
+			return ""
+
+	else:
+		return redirect('/')
