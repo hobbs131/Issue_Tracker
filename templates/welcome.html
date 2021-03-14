@@ -1,1 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    	<meta charset="utf-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	    <title>Welcome to Issue Tracker</title>
+	    <style type="text/css">
+              .jumbotron { text-align: center; }
+            </style>
+  </head>
 
+  <body>
+   	<div class="jumbotron" style="background: cadetblue !important">
+        <h1 style="font-family: 'lucida console', monospace;">Welcome to Issue Tracker!</h1>
+        <p> Issue Tracker is an application which is used to manage and maintain lists of issues </p>
+        <p>Either login for full functionality, or continue to website with limited functionality.</p>
+        <br/>
+        <div style="margin:auto; ">
+          <p>functionality includes:</p>
+          <ul style="list-style-position: inside; text-align:left; margin: auto; width: 10%;">
+            <li> Search </li>
+            <li> Edit (user) </li>
+            <li> Delete (user) </li>
+            <li> Sort </li>
+          </ul>
+          <br/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+          <button id= "myButton" type="button" class="btn btn-primary btn-block" style="width: 30%; background-color: whitesmoke; margin: auto; border:none; color: grey;" onclick="location.href ='/login'">
+            Login
+          </button>
+          <br>
+          <button id= "myButton1" type="button" class="btn btn-primary btn-block" style="width: 30%; background-color: whitesmoke; margin: auto; border:none; color: grey;" onclick="location.href ='/issues_guest'">
+            Continue to Website
+          </button>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+  </body>
+</html>
