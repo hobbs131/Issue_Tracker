@@ -5,8 +5,8 @@
 {% set prio = ["Low","Medium","High","Urgent"] %}
 {% set status = ["Open","Closed","In Progress"] %}
 
-<div id="add_issue_div">
-  <form id="addissueform" class="pure-form pure-form-stacked" method = "post" action = "postIssueEntry">
+<div id="issue_div">
+  <form id="issueForm" class="pure-form pure-form-stacked" method="post" action="postIssueEntry">
     <fieldset>
       <legend>Add Issue</legend>
       <div class="pure-g">
@@ -16,39 +16,39 @@
           <textarea id="inGridTextArea" name="issue" rows="2" cols="45" wrap="soft"></textarea>
 
           <label for="priority">Priority</label>
-          <select name = "priority">
+          <select name="priority">
             {% for p in prio %}
-    				    <option value = "{{p}}">{{p}}</option>
+    				    <option value="{{p}}">{{p}}</option>
     			  {% endfor %}
           </select>
         </div>
 
         <div class="pure-u-1 pure-u-md-1-2">
           <label for="assignee">Assignee</label>
-          <input type="text" name = "assignee" />
+          <input type="text" name="assignee"/>
 
           <label for="status">Status</label>
-          <select name = "status">
+          <select name="status">
             {% for s in status %}
-    				    <option value = "{{s}}">{{s}}</option>
+    				    <option value="{{s}}">{{s}}</option>
     			  {% endfor %}
           </select>
         </div>
 
         <div class="pure-u-1 pure-u-md-1-2">
           <label for="opened_on">Opened On</label>
-          <input type="date" name = "opened_on" />
+          <input type="date" name="opened_on"/>
 
           <label for="opened_by">Opened By</label>
-          <input type="text" name = "opened_by" />
+          <input type="text" name="opened_by"/>
         </div>
 
         <div class="pure-u-1 pure-u-md-1-2">
           <label for="closed_on">Closed On</label>
-          <input type="date" name = "closed_on" />
+          <input type="date" name="closed_on"/>
 
           <label for="closed_by">Closed By</label>
-          <input type="text" name = "closed_by" />
+          <input type="text" name="closed_by"/>
         </div>
       </div>
 

@@ -77,6 +77,22 @@ def issues():
 def add_issue():
 	return render_template('add_issue.html')
 
+@app.route('/view_issue')
+def view_issue():
+
+	if 'id' in request.args:
+		id = request.args.get('id')
+		with db.get_db_cursor(True) as cur:
+			cur.execute("SELECT json_agg(issues) FROM issues WHERE id = {id}".format(id=id))
+
+			results = cur.fetchone()[0]
+			print(results)
+			if (results != None):
+				return render_template('view_issue.html', results=results)
+
+	return redirect('/issues')
+
+
 
 @app.route('/postIssueEntry', methods = ["POST"])
 def postIssueEntry():

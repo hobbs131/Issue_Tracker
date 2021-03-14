@@ -31,6 +31,24 @@ select.disabled::-ms-expand {
   display: none;
 }
 
+.pure-form textarea[disabled], .pure-form input[type=text][disabled], .pure-form input[type=date][disabled], .pure-form select[disabled] {
+	color:black;
+	background-color:#0000;
+	border: 1px solid #ccc;
+	opacity:1;
+}
+
+select.disabled {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-indent: 1px;
+	text-overflow: '';
+}
+
+select.disabled::-ms-expand {
+  display: none;
+}
+
 #issueTableHeaders th {
   border: none;
 }
@@ -85,14 +103,12 @@ select.disabled::-ms-expand {
   margin: auto;
 }
 
-
-
 .pure-u-1 {
   margin-top: 15px;
   float: center;
 }
 
-#addissueform {
+#issueForm {
   width: 100%;
   display: inline-block;
   margin-left: auto;
@@ -100,7 +116,7 @@ select.disabled::-ms-expand {
   text-align: left;
 }
 
-#addissueform label {
+#issueForm label {
   min-width: 200px;
   max-width: 450px;
   width: 90%;
@@ -114,27 +130,21 @@ select.disabled::-ms-expand {
   margin: 0px 5%;
 }
 
-#outOfGridTextArea {
-  min-width: 200px;
-  width: 90%;
-  margin: 0px 5%;
-}
-
-#addissueform input {
+#issueForm input {
   min-width: 200px;
   max-width: 450px;
   width: 90%;
   margin: 0px 5%;
 }
 
-#addissueform select {
+#issueForm select {
   min-width: 200px;
   max-width: 450px;
   width: 90%;
   margin: 0px 5%;
 }
 
-#addissueform button {
+#issueForm button {
   display: block;
   margin: auto;
   width: 200px;
@@ -142,9 +152,15 @@ select.disabled::-ms-expand {
   margin-top: 25px;
 }
 
-#addissueform legend {
+#issueForm legend {
   display: block;
   margin: auto;
   font-size: 20px;
   text-align: center;
+}
+
+#outOfGridTextArea {
+  min-width: 200px;
+  width: 90%;
+  margin: 0px 5%;
 }

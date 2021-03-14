@@ -46,6 +46,9 @@
 			{% endfor %}
 			</select></td>
 			<td class = "buttons">
+				<button class="search-button" style="width:32px" onclick="viewIssue({{r.id}})">
+					<i class="fa fa-search"></i>
+				</button>
 				<button class="edit-button" style="width:32px" onclick="editIssue({{r.id}},this.parentElement.parentElement)">
 					<i class="fa fa-edit"></i>
 				</button>
@@ -155,6 +158,12 @@ function showClosed() {
 	window.location = "issues?" + urlParams.toString();
 }
 
+function viewIssue(id) {
+	console.log(id);
+	window.location = "view_issue?id=" + id;
+
+}
+
 function editIssue(id,row) {
 	cells = row.children
 	for(i = 1;i<9;i++){
@@ -213,4 +222,4 @@ function searchTable(){
 }
 
 </script>
-{%endblock %}
+{% endblock %}
