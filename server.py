@@ -56,15 +56,8 @@ def home():
 
 @app.route('/issues')
 def issues():
-	if 'order-by' in request.args:
-		order_by = request.args.get('order-by')
-	else:
-		order_by = "id"
-
-	if 'order' in request.args:
-		order = request.args.get('order')
-	else:
-		order = 'DESC'
+	order_by = request.args.get('order-by', 'id')
+	order = request.args.get('order', 'asc')
 
 	with db.get_db_cursor(True) as cur:
 		cur.execute("SELECT json_agg(elem) FROM (SELECT * FROM issues WHERE deletedAt IS NULL ORDER BY {order_by} {order}) as elem".format(order_by=order_by, order=order))

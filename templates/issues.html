@@ -93,17 +93,17 @@ function setOrderIcon() {
 	}
 	console.log(column);
 
-	var order = 'desc';
+	var order = 'asc';
 	if (urlParams.has('order')) {
-		order = urlParams.get('order-by');
+		order = urlParams.get('order');
 	}
 
 	var headers = document.getElementById("issueTableHeaders").cells;
 
-	if (order = 'asc') {
-		headers[column].innerHTML += "<i class='fa fa-arrow-down' aria-hidden='true' style='float:right'></i>"
-	} else {
+	if (order == 'asc') {
 		headers[column].innerHTML += "<i class='fa fa-arrow-up' aria-hidden='true' style='float:right'></i>"
+	} else {
+		headers[column].innerHTML += "<i class='fa fa-arrow-down' aria-hidden='true' style='float:right'></i>"
 	}
 
 	//<i class="fa fa-arrow-up" aria-hidden="true" style="visibility:hidden"></i>
@@ -113,8 +113,23 @@ function setOrderIcon() {
 $('document').ready(setOrderIcon);
 
 function reorder(name) {
+	var urlParams = new URLSearchParams(window.location.search);
+	var order = 'asc';
+	if (urlParams.has('order-by')) {
+		var column = urlParams.get('order-by');
+		if (column == name) {
+			order = urlParams.get('order');
+			if (order == 'asc') {
+				order = 'desc';
+			} else {
+				order = 'asc';
+			}
+		}
+	} else {
+		order = 'desc';
+	}
 	console.log(name);
-	window.location = "issues?order-by=" + name;
+	window.location = "issues?order-by=" + name + "&order=" + order;
 }
 
 function editIssue(id,row) {
