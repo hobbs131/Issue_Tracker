@@ -118,9 +118,9 @@ function setTableOptions() {
 
 	var optionsDiv = document.getElementById("table_options_div");
 	if (urlParams.has('hide-closed') && urlParams.get('hide-closed') == "true") {
-		optionsDiv.innerHTML += "<button type='button' class='pure-menu-item' onclick='showClosed();' style='background-color: whitesmoke; border-radius: 8px;'>Show closed issues</button>"
+		optionsDiv.innerHTML += "<button type='button' class='pure-button pure-button secondary' onclick='showClosed();' style='background-color: whitesmoke; border-radius: 8px; color:grey; float:right; margin: 0 2.5%;'>Show closed issues</button>"
 	} else {
-		optionsDiv.innerHTML += "<button type='button' class='pure-menu-item' onclick='hideClosed();' style='background-color: whitesmoke; border-radius: 8px;'>Hide closed issues</button>"
+		optionsDiv.innerHTML += "<button type='button' class='pure-button pure-button secondary' onclick='hideClosed();' style='background-color: whitesmoke; border-radius: 8px; color:grey; float:right; margin: 0 2.5%;'>Hide closed issues</button>"
 	}
 }
 
