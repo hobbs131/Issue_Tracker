@@ -73,7 +73,7 @@ select.disabled::-ms-expand {
   overflow: hidden;
 }
 
-@media screen and (max-width: 1225px) and (min-width: 1075px) {
+@media screen and (max-width: 1500px) and (min-width: 1075px) {
   .priority-4 {
     display:none
   }
@@ -198,7 +198,7 @@ select.disabled::-ms-expand {
 footer {
   margin:auto;
   text-align: center;
-  color: grey;
+  color: white;
   position: fixed;
   bottom: 0;
   width: 100%;
