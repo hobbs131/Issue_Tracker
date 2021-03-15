@@ -6,7 +6,10 @@ CSCI 5117, Spring 2021, [assignment description](https://canvas.umn.edu/courses/
 * App Link: <https://blueberries-p1.herokuapp.com/>
 ### Students
 * Tanner Hobbs, hobbs131@umn.edu
-* ...
+* Isabel Richardson, rich1529@umn.edu
+* Jacob Hermann, herma655@umn.edu
+* Ellie Hollenberger, holle299@umn.edu
+* Sam Scheidecker, schei348@umn.edu
 ## Key Features
 **Describe the most challenging features you implemented
 (one sentence per bullet, maximum 4 bullets):**
