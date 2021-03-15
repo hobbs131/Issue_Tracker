@@ -186,7 +186,8 @@ select.disabled::-ms-expand {
   display: block;
   margin: auto;
   width: 200px;
-  background-color: cadetblue;
+  background-color: whitesmoke;
+  color: grey;
   margin-top: 25px;
 }
 
