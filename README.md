@@ -17,6 +17,13 @@ CSCI 5117, Spring 2021, [assignment description](https://canvas.umn.edu/courses/
 ## Screenshots of Site
 Landing Page
 ![landing_page](https://user-images.githubusercontent.com/60115853/111177117-f1d80280-8577-11eb-8365-d34649183082.png)
+Guest View
+![guest_view](https://user-images.githubusercontent.com/60115853/111177326-1d5aed00-8578-11eb-8f16-d8f842f2e168.png)
+User View
+![user_view](https://user-images.githubusercontent.com/60115853/111177437-36fc3480-8578-11eb-9155-287d032368a2.png)
+Add Issue View
+![add_issue](https://user-images.githubusercontent.com/60115853/111177563-598e4d80-8578-11eb-865d-b3e0b53653cf.png)
+
 
 ## Mock-up 
 There are a few tools for mock-ups. Paper prototypes (low-tech, but effective and cheap), Digital picture edition software (gimp / photoshop / etc.), or dedicated tools like moqups.com (I'm calling out moqups here in particular since it seems to strike the best balance between "easy-to-use" and "wants your money" -- the free teir isn't perfect, but it should be sufficient for our needs with a little "creative layout" to get around the page-limit)
