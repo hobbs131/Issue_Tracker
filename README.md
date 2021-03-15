@@ -23,6 +23,7 @@ Issue Tracker is a full-stack application which is used to manage and maintain l
 * Query - sort issues
 * User Authentication - Auth0
 * Guest View and User View - guest view has limited functionality
+* Issue Close Up - shows the specific issue and a long form description of that issue
 
 ## Screenshots of Site
 Landing Page
