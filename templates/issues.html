@@ -29,7 +29,7 @@
 	{% for r in results %}
 		<tr>
 			<td class="priority-2"> {{r.id}} </td>
-			<td class="priority-0"> <input type = "text" class = "disabled" value = "{{r.issue}}" disabled size="10"/></td>
+			<td class="priority-0"> <input type = "text" class = "disabled" value = "{{r.issue}}" disabled/></td>
 			<td class="priority-2"> <select class = "disabled" disabled>
 			{% for p in prio %}
 				<option value = "{{p}}" {% if r.priority == p %}selected{% endif %}>{{p}}</option>
