@@ -20,34 +20,37 @@
 </head>
 
 <body>
-  <div id="menu">
-    <div class="pure-menu">
-      <ul class="pure-menu-horizontal">
-        <li class="pure-menu-item">
-        {% if session.profile %}
-          <a href="{{ url_for("issues") }}" class="pure-menu-link">Issue Table</a>
-        {% else %}
-          <a href="{{ url_for("issues_guest") }}" class="pure-menu-link">Issue Table</a>
-        </li>
-        {% endif %}
+  <div style="background-color:cadetblue;">
+    <div id="menu">
+      <div class="pure-menu">
+        <ul class="pure-menu-horizontal">
+          <li class="pure-menu-item">
+          {% if session.profile %}
+            <a href="{{ url_for("issues") }}" class="pure-menu-link">Issue Table</a>
+          {% else %}
+            <a href="{{ url_for("issues_guest") }}" class="pure-menu-link">Issue Table</a>
+          </li>
+          {% endif %}
 
-        {% if session.profile %}
-          <li class="pure-menu-item" id="logout">
-            <a href="{{ url_for("logout") }}" class="pure-menu-link">Logout</a>
-          </li>
-        {% else %}
-          <li class="pure-menu-item" id="login">
-            <a href="{{ url_for("login") }}" class="pure-menu-link">Login</a>
-          </li>
-        {% endif %}
-      </ul>
+          {% if session.profile %}
+            <li class="pure-menu-item" id="logout">
+              <a href="{{ url_for("logout") }}" class="pure-menu-link">Logout</a>
+            </li>
+          {% else %}
+            <li class="pure-menu-item" id="login">
+              <a href="{{ url_for("login") }}" class="pure-menu-link">Login</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin:auto; text-align:center;">
+      <h1 class = "headertext">Issue Tracker</h1>
+      <p class = "subtitle">a tool for tracking your program's bugs</p>
     </div>
   </div>
 
-  <div style="margin:auto; text-align:center;">
-    <h1 class = "headertext">Issue Tracker</h1>
-    <p class = "subtitle">a tool for tracking your program's bugs</p>
-  </div>
 
   <div id="content">
     {% block content %}
