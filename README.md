@@ -3,7 +3,7 @@ CSCI 5117, Spring 2021, [assignment description](https://canvas.umn.edu/courses/
 ## App Info:
 * Team Name: Blueberries
 * App Name: Issue Tracker
-* App Link: <https://TODO.heroku.com/>
+* App Link: <https://blueberries-p1.herokuapp.com/>
 ### Students
 * Tanner Hobbs, hobbs131@umn.edu
 * ...
