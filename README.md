@@ -1,25 +1,16 @@
 # Issue Tracker
 
 ## App Info:
-* Team Name: Blueberries
-* App Name: Issue Tracker
-* App Link: <https://blueberries-p1.herokuapp.com/>
+* 
+* Name: Issue Tracker
+* Link: <https://blueberries-p1.herokuapp.com/>
 ### Project Members
 * Tanner Hobbs, hobbs131@umn.edu
 * Isabel Richardson, rich1529@umn.edu
 * Jacob Hermann, herma655@umn.edu
 * Ellie Hollenberger, holle299@umn.edu
 * Sam Scheidecker, schei348@umn.edu
-## Key Features
-**Describe the most challenging features you implemented
-(one sentence per bullet, maximum 4 bullets):**
-* Building the framework (setting up the server, database, auth0, etc) - had to make sure the basics of the application worked before building on top
-* Building the core features (search, delete, edit, add) - had to figure out how/where we wanted to implement these features
-* Building the additional features (sorting queries, viewing single issues) - had to make this work both on guest view and user view
-* Styling the application - difficult in its own way, getting everything to look the way we wanted it to.
-## Testing Notes
-**Is there anything special we need to know in order to effectively test your app? (optional):**
-* ...
+
 ## Screenshots of Site
 Landing Page
 ![landing_page](https://user-images.githubusercontent.com/60115853/111177117-f1d80280-8577-11eb-8365-d34649183082.png)
