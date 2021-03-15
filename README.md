@@ -29,11 +29,6 @@ Add Issue View
 
 
 ## Mock-up 
-There are a few tools for mock-ups. Paper prototypes (low-tech, but effective and cheap), Digital picture edition software (gimp / photoshop / etc.), or dedicated tools like moqups.com (I'm calling out moqups here in particular since it seems to strike the best balance between "easy-to-use" and "wants your money" -- the free teir isn't perfect, but it should be sufficient for our needs with a little "creative layout" to get around the page-limit)
-In this space please either provide images (max 4) showing your prototypes, OR, a link to an online hosted mock-up tool like moqups.com
-
-**[Add images/photos that show your paper prototype (maximum 4)](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository) along with a very brief caption:**
-
 ![issue1](https://user-images.githubusercontent.com/60115853/108277032-5c934b00-713e-11eb-984f-348855bfed6f.png?raw=true "Login and Main Page")
 ![issue2](https://user-images.githubusercontent.com/60115853/108277160-96645180-713e-11eb-8d0e-f44798519866.png?raw=true "Delete Row and Not Logged in View")
 ![issue3](https://user-images.githubusercontent.com/60115853/108277243-b6941080-713e-11eb-8b88-b121a1fdd37b.png?raw=true "Search and Edit Row View")
