@@ -199,7 +199,7 @@ footer {
   margin:auto;
   text-align: center;
   color: grey;
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
   background-color: whitesmoke;
