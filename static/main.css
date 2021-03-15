@@ -1,5 +1,6 @@
 body div #content {
     padding:1em;
+    margin-bottom: 75px;
 }
 
 body {
@@ -113,7 +114,6 @@ select.disabled::-ms-expand {
 #addissue {
   background-color: whitesmoke;
   border-radius: 8px;
-  margin-bottom: 75px;
 }
 
 .headertext {
@@ -207,6 +207,7 @@ select.disabled::-ms-expand {
 }
 
 footer {
+
   margin:auto;
   text-align: center;
   color: white;
