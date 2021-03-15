@@ -1,18 +1,28 @@
 # Issue Tracker
-Issue Tracker is a full-stack application which is used to manage and maintain lists of issues. It can be used to either actively contribute to a project by completing issues, or inactively track the progress of a project. 
-
-## Technologies
-* Frontend: HTML/CSS/Javascript
-* Backend: Python, Flask, and PostgreSQL 
+Issue Tracker is a full-stack application which is used to manage and maintain lists of issues. It can be used to either actively contribute to a project by completing issues, or inactively track the progress of a project.  
 ## App Info:
 * Name: Issue Tracker
 * Link: <https://blueberries-p1.herokuapp.com/>
+
 ### Group Members
 * Tanner Hobbs, hobbs131@umn.edu
 * Isabel Richardson, rich1529@umn.edu
 * Jacob Hermann, herma655@umn.edu
 * Ellie Hollenberger, holle299@umn.edu
 * Sam Scheidecker, schei348@umn.edu
+
+## Technologies
+* Frontend: HTML/CSS/Javascript
+* Backend: Python, Flask, and PostgreSQL
+
+## Features
+* Search - search through the list of issues
+* Edit - edit issues
+* Delete - delete issues
+* Add - add issues
+* Query - sort issues
+* User Authentication - Auth0
+* Guest View and User View - guest view has limited functionality
 
 ## Screenshots of Site
 Landing Page
