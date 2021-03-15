@@ -10,6 +10,6 @@ create table issues (
   closed_on varchar(255),
   closed_by varchar(255),
   status varchar(255),
+  description varchar(255),
   deletedAt Date
 );
-
