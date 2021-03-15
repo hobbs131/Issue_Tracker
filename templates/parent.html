@@ -21,14 +21,14 @@
 
 <body>
   <div >
-    <div id="menu" style="background-color:cadetblue; padding: 1.5px; color:black;">
+    <div id="menu" style="background-color:cadetblue; padding: 1.5px;">
       <div class="pure-menu">
         <ul class="pure-menu-horizontal">
           <li class="pure-menu-item">
           {% if session.profile %}
-            <a href="{{ url_for("issues") }}" class="pure-menu-link">Issue Table</a>
+            <a href="{{ url_for("issues") }}" class="pure-menu-link" style="color:white;">Issue Table</a>
           {% else %}
-            <a href="{{ url_for("issues_guest") }}" class="pure-menu-link">Issue Table</a>
+            <a href="{{ url_for("issues_guest") }}" class="pure-menu-link" style="color:white;">Issue Table</a>
           </li>
           {% endif %}
 
