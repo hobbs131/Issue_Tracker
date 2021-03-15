@@ -20,7 +20,7 @@
 </head>
 
 <body>
-  <div >
+  <div>
     <div id="menu" style="background-color:cadetblue; padding: 0.5px;">
       <div class="pure-menu">
         <ul class="pure-menu-horizontal">
@@ -34,11 +34,11 @@
 
           {% if session.profile %}
             <li class="pure-menu-item" id="logout">
-              <a href="{{ url_for("logout") }}" class="pure-menu-link">Logout</a>
+              <a href="{{ url_for("logout") }}" class="pure-menu-link" style="color:white;">Logout</a>
             </li>
           {% else %}
             <li class="pure-menu-item" id="login">
-              <a href="{{ url_for("login") }}" class="pure-menu-link">Login</a>
+              <a href="{{ url_for("login") }}" class="pure-menu-link" style="color:white;">Login</a>
             </li>
           {% endif %}
         </ul>
