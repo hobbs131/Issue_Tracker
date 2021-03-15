@@ -1,10 +1,10 @@
-# Module 1 Group Assignment
-CSCI 5117, Spring 2021, [assignment description](https://canvas.umn.edu/courses/217951/pages/project-1)
+# Issue Tracker
+
 ## App Info:
 * Team Name: Blueberries
 * App Name: Issue Tracker
 * App Link: <https://blueberries-p1.herokuapp.com/>
-### Students
+### Project Members
 * Tanner Hobbs, hobbs131@umn.edu
 * Isabel Richardson, rich1529@umn.edu
 * Jacob Hermann, herma655@umn.edu
