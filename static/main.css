@@ -109,6 +109,7 @@ select.disabled::-ms-expand {
 #addissue {
   background-color: whitesmoke;
   border-radius: 8px;
+  margin-bottom: 75px;
 }
 
 .headertext {
