@@ -1,7 +1,6 @@
 # Issue Tracker
 
 ## App Info:
-* 
 * Name: Issue Tracker
 * Link: <https://blueberries-p1.herokuapp.com/>
 ### Group Members
