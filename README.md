@@ -13,7 +13,10 @@ CSCI 5117, Spring 2021, [assignment description](https://canvas.umn.edu/courses/
 ## Key Features
 **Describe the most challenging features you implemented
 (one sentence per bullet, maximum 4 bullets):**
-* ...
+* Building the framework (setting up the server, database, auth0, etc) - had to make sure the basics of the application worked before building on top
+* Building the core features (search, delete, edit, add) - had to figure out how/where we wanted to implement these features
+* Building the additional features (sorting queries, viewing single issues) - had to make this work both on guest view and user view
+* Styling the application - difficult in its own way, getting everything to look the way we wanted it to.
 ## Testing Notes
 **Is there anything special we need to know in order to effectively test your app? (optional):**
 * ...
