@@ -189,6 +189,7 @@ select.disabled::-ms-expand {
   background-color: whitesmoke;
   color: grey;
   margin-top: 25px;
+  border-radius: 8px;
 }
 
 #issueForm legend {
