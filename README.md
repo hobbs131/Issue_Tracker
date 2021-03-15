@@ -4,7 +4,7 @@
 * 
 * Name: Issue Tracker
 * Link: <https://blueberries-p1.herokuapp.com/>
-### Project Members
+### Group Members
 * Tanner Hobbs, hobbs131@umn.edu
 * Isabel Richardson, rich1529@umn.edu
 * Jacob Hermann, herma655@umn.edu
